@@ -1,0 +1,55 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+if (!hasProperty('mainClass')) {
+    ext.mainClass = ''
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}
+
+repositories {
+    mavenCentral()
+	jcenter()
+}
+
+configurations {
+	provided
+}
+
+sourceSets {
+	main.compileClasspath += [configurations.provided]
+	main.runtimeClasspath += [configurations.provided]
+	test.compileClasspath += [configurations.provided]
+	test.runtimeClasspath += [configurations.provided]
+}
+
+eclipse {
+	classpath {
+		// include 'provided' dependencies on the classpath
+		plusConfigurations += [configurations.provided]
+
+		downloadSources = true
+	}
+}
+
+dependencies {
+    compile group: 'com.netflix.karyon',   name: 'karyon-core',          version: '2.1.00-RC6'
+    compile group: 'com.netflix.karyon',   name: 'karyon-governator',    version: '2.1.00-RC6'
+    compile group: 'com.netflix.karyon',   name: 'karyon-archaius',      version: '2.1.00-RC6'
+		compile group: 'com.netflix.archaius', name: 'archaius-zookeeper',   version: '0.6.3'
+		compile group: 'com.netflix.karyon',   name: 'karyon-servo',         version: '2.1.00-RC6'
+		compile (group: 'com.netflix.karyon', name: 'karyon-eureka',     version: '2.1.00-RC6')  {
+		exclude group: 'javax.servlet'
+		}
+		compile group: 'com.netflix.karyon', name: 'karyon-jersey-blocking',  version: '2.1.00-RC6'
+		//we need it here as all depended projects that want to use ribbon 2, will pick ribbon 1 instead from eureka client
+		compile group: 'com.netflix.ribbon', name: 'ribbon-httpclient',  version: '2.0-RC9'
+    compile group: 'org.slf4j',          name: 'slf4j-api',         version: '1.7.0'
+		provided group: 'javax.servlet',               name: 'javax.servlet-api', version: '3.0.1'
+		compile group: 'com.google.inject.extensions', name: 'guice-servlet', version: '3.0'
+}
