@@ -1,0 +1,384 @@
+2015-02-24 18:16:11,229 WARN main com.netflix.governator.lifecycle.ClasspathScanner - No base packages specified - no classpath scanning will be done
+2015-02-24 18:16:11,280 WARN main com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2015-02-24 18:16:11,280 INFO main com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2015-02-24 18:16:11,298 INFO main com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@2d710f1a
+2015-02-24 18:16:11,477 INFO main com.thomson.karyon.archaius.ZKDefaultPropertiesLoader - Loading application properties with app id: 1p-service-template and environment: null
+2015-02-24 18:16:11,496 INFO main com.netflix.config.util.ConfigurationUtils - Loaded properties file file:/Users/suman/workspace/1p-service-template/bin/1p-service-template.properties
+2015-02-24 18:16:11,508 WARN main com.thomson.karyon.archaius.ZKDefaultPropertiesLoader - Zookeeper quorum or configuration root is not set! {quorum: '', root: '/1p-service-template/config'}
+2015-02-24 18:16:11,527 INFO main org.hibernate.validator.util.Version - Hibernate Validator 4.1.0.Final
+2015-02-24 18:16:11,547 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.ShutdownModule
+2015-02-24 18:16:11,548 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.ShutdownModule
+2015-02-24 18:16:11,548 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:16:11,548 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:16:11,548 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomson.injection.module.MainModule
+2015-02-24 18:16:11,548 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomson.injection.module.MainModule
+2015-02-24 18:16:11,548 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomson.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:16:11,552 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomson.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:16:11,704 INFO main com.netflix.karyon.jersey.blocking.PropertiesBasedResourceConfig - Packages to scan by jersey [com.thomson.rest]
+2015-02-24 18:16:12,103 INFO main com.netflix.karyon.jersey.blocking.JerseyBasedRouter - Started Jersey based request router.
+2015-02-24 18:16:12,252 INFO main io.reactivex.netty.server.AbstractServer - Rx server started at port: 7001
+2015-02-24 18:16:12,252 INFO main com.netflix.karyon.transport.http.HttpRxServerProvider - Starting server karyonJerseyModule on port 7001...
+2015-02-24 18:16:12,259 INFO main com.thomson.handler.HealthCheck - Health check initialized.
+2015-02-24 18:16:12,266 INFO main io.reactivex.netty.server.AbstractServer - Rx server started at port: 7002
+2015-02-24 18:16:12,270 WARN main com.netflix.appinfo.PropertiesInstanceConfig - Cannot find the properties specified : eureka-client. This may be okay if there are other environment specific properties or the configuration is installed with a different mechanism.
+2015-02-24 18:16:20,479 INFO main com.netflix.appinfo.CloudInstanceConfig - Datacenter is: Amazon
+2015-02-24 18:16:20,486 INFO main com.netflix.appinfo.providers.EurekaConfigBasedInstanceInfoProvider - Setting initial instance status as: STARTING
+2015-02-24 18:16:20,495 WARN main com.netflix.discovery.DefaultEurekaClientConfig - Cannot find the properties specified : eureka-client. This may be okay if there are other environment specific properties or the configuration is installed with a different mechanism.
+2015-02-24 18:16:20,526 WARN main com.netflix.discovery.DiscoveryClient - DISCOVERY: Could not pick a zone based on preferred zone settings. My zone - default, preferSameZone- false. Defaulting to default
+2015-02-24 18:16:20,807 INFO main com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2015-02-24 18:16:20,808 INFO main com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2015-02-24 18:16:20,808 INFO main com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2015-02-24 18:16:20,808 INFO main com.netflix.discovery.DiscoveryClient - Application is null : false
+2015-02-24 18:16:20,808 INFO main com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2015-02-24 18:16:20,808 INFO main com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2015-02-24 18:16:21,272 INFO main com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/ with status code 200.
+2015-02-24 18:16:21,272 INFO main com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2015-02-24 18:16:21,384 INFO main com.netflix.discovery.DiscoveryClient - The response status is 200
+2015-02-24 18:16:21,386 INFO main com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2015-02-24 18:16:51,544 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:16:51,548 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_6_, is fetching remote regions? false 
+2015-02-24 18:16:51,701 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 404.
+2015-02-24 18:16:51,701 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140 - Re-registering apps/SERVICE_NAME
+2015-02-24 18:16:51,701 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140: registering service...
+2015-02-24 18:16:51,879 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME with status code 204.
+2015-02-24 18:16:51,879 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140 - registration status: 204
+2015-02-24 18:17:09,596 INFO DiscoveryClient-2 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:17:09,596 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140 - retransmit instance info with status UP
+2015-02-24 18:17:09,596 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140: registering service...
+2015-02-24 18:17:09,978 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME with status code 204.
+2015-02-24 18:17:09,978 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140 - registration status: 204
+2015-02-24 18:17:21,851 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:17:21,854 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:17:22,037 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 404.
+2015-02-24 18:17:22,037 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140 - Re-registering apps/SERVICE_NAME
+2015-02-24 18:17:22,037 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140: registering service...
+2015-02-24 18:17:22,338 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME with status code 204.
+2015-02-24 18:17:22,339 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_SERVICE_NAME/10.212.139.140 - registration status: 204
+2015-02-24 18:17:48,163 INFO DiscoveryClient-1 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:17:52,011 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:17:52,014 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:17:52,495 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:17:58,941 INFO RxCachedThreadScheduler-2 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:18:22,172 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:18:22,174 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:18:22,652 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:18:26,352 INFO DiscoveryClient-0 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:18:52,330 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:18:52,332 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:18:52,806 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:19:04,561 INFO DiscoveryClient-2 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:19:22,488 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:19:22,491 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:19:22,965 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:19:42,760 INFO DiscoveryClient-1 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:19:52,646 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:19:52,648 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:19:53,120 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:20:20,939 INFO DiscoveryClient-3 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:20:22,801 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:20:22,803 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:20:23,274 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:20:52,964 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:20:52,966 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:20:53,431 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:20:59,131 INFO DiscoveryClient-0 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:21:20,524 WARN DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DISCOVERY: Could not pick a zone based on preferred zone settings. My zone - default, preferSameZone- false. Defaulting to default
+2015-02-24 18:21:23,202 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:21:23,203 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:21:23,589 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:21:37,327 INFO DiscoveryClient-0 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:21:53,360 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:21:53,361 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:21:53,744 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:22:15,522 INFO DiscoveryClient-1 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:22:23,514 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:22:23,516 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:22:23,899 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:22:53,669 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:22:53,670 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:22:53,695 INFO DiscoveryClient-3 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:22:54,052 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:23:23,897 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:23:23,897 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:23:24,206 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:23:31,889 INFO DiscoveryClient-1 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:23:54,049 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:23:54,050 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:23:54,363 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:24:10,073 INFO DiscoveryClient-3 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:24:24,273 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:24:24,274 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:24:24,514 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:24:48,259 INFO DiscoveryClient-2 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:24:54,431 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:24:54,431 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:24:54,671 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:25:24,587 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:25:24,588 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:25:24,823 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:25:26,447 INFO DiscoveryClient-0 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:25:54,744 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:25:54,745 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:25:55,043 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:26:04,642 INFO DiscoveryClient-3 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:26:20,523 WARN DiscoveryClient-0 com.netflix.discovery.DiscoveryClient - DISCOVERY: Could not pick a zone based on preferred zone settings. My zone - default, preferSameZone- false. Defaulting to default
+2015-02-24 18:26:24,965 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:26:24,966 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:26:25,197 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:26:42,845 INFO DiscoveryClient-3 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:26:55,125 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:26:55,126 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:26:55,353 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:27:21,048 INFO DiscoveryClient-2 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:27:25,280 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:27:25,281 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:27:25,506 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:27:55,435 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:27:55,435 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:27:55,659 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/SERVICE_NAME/10.212.139.140 with status code 200.
+2015-02-24 18:27:59,233 INFO DiscoveryClient-1 com.thomson.handler.HealthCheck - Health check called.
+2015-02-24 18:34:33,115 WARN main com.netflix.governator.lifecycle.ClasspathScanner - No base packages specified - no classpath scanning will be done
+2015-02-24 18:34:33,162 WARN main com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2015-02-24 18:34:33,163 INFO main com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2015-02-24 18:34:33,181 INFO main com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@2d710f1a
+2015-02-24 18:34:33,361 INFO main com.thomson.karyon.archaius.ZKDefaultPropertiesLoader - Loading application properties with app id: 1p-service-template and environment: null
+2015-02-24 18:34:33,381 INFO main com.netflix.config.util.ConfigurationUtils - Loaded properties file file:/Users/suman/workspace/1p-service-template/bin/1p-service-template.properties
+2015-02-24 18:34:33,394 WARN main com.thomson.karyon.archaius.ZKDefaultPropertiesLoader - Zookeeper quorum or configuration root is not set! {quorum: '', root: '/1p-service-template/config'}
+2015-02-24 18:34:33,412 INFO main org.hibernate.validator.util.Version - Hibernate Validator 4.1.0.Final
+2015-02-24 18:34:33,434 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.ShutdownModule
+2015-02-24 18:34:33,434 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.ShutdownModule
+2015-02-24 18:34:33,434 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:34:33,434 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:34:33,435 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomsonreuters.injection.module.MainModule
+2015-02-24 18:34:33,435 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomsonreuters.injection.module.MainModule
+2015-02-24 18:34:33,435 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomsonreuters.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:34:33,438 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomsonreuters.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:34:33,612 INFO main com.netflix.karyon.jersey.blocking.PropertiesBasedResourceConfig - Packages to scan by jersey [com.thomson.rest]
+2015-02-24 18:36:21,313 WARN main com.netflix.governator.lifecycle.ClasspathScanner - No base packages specified - no classpath scanning will be done
+2015-02-24 18:36:21,359 WARN main com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2015-02-24 18:36:21,359 INFO main com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2015-02-24 18:36:21,377 INFO main com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@2d710f1a
+2015-02-24 18:36:21,553 INFO main com.thomson.karyon.archaius.ZKDefaultPropertiesLoader - Loading application properties with app id: 1p-service-template and environment: null
+2015-02-24 18:36:21,572 INFO main com.netflix.config.util.ConfigurationUtils - Loaded properties file file:/Users/suman/workspace/1p-service-template/bin/1p-service-template.properties
+2015-02-24 18:36:21,584 WARN main com.thomson.karyon.archaius.ZKDefaultPropertiesLoader - Zookeeper quorum or configuration root is not set! {quorum: '', root: '/1p-service-template/config'}
+2015-02-24 18:36:21,604 INFO main org.hibernate.validator.util.Version - Hibernate Validator 4.1.0.Final
+2015-02-24 18:36:21,626 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.ShutdownModule
+2015-02-24 18:36:21,626 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.ShutdownModule
+2015-02-24 18:36:21,627 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:36:21,627 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:36:21,627 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomsonreuters.injection.module.MainModule
+2015-02-24 18:36:21,627 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomsonreuters.injection.module.MainModule
+2015-02-24 18:36:21,627 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomsonreuters.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:36:21,630 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomsonreuters.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:36:21,776 INFO main com.netflix.karyon.jersey.blocking.PropertiesBasedResourceConfig - Packages to scan by jersey [com.thomson.rest]
+2015-02-24 18:37:39,055 WARN main com.netflix.governator.lifecycle.ClasspathScanner - No base packages specified - no classpath scanning will be done
+2015-02-24 18:37:39,101 WARN main com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2015-02-24 18:37:39,101 INFO main com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2015-02-24 18:37:39,120 INFO main com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@2d710f1a
+2015-02-24 18:37:39,296 INFO main com.thomson.karyon.archaius.ZKDefaultPropertiesLoader - Loading application properties with app id: 1p-service-template and environment: null
+2015-02-24 18:37:39,315 INFO main com.netflix.config.util.ConfigurationUtils - Loaded properties file file:/Users/suman/workspace/1p-service-template/bin/1p-service-template.properties
+2015-02-24 18:37:39,327 WARN main com.thomson.karyon.archaius.ZKDefaultPropertiesLoader - Zookeeper quorum or configuration root is not set! {quorum: '', root: '/1p-service-template/config'}
+2015-02-24 18:37:39,347 INFO main org.hibernate.validator.util.Version - Hibernate Validator 4.1.0.Final
+2015-02-24 18:37:39,370 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.ShutdownModule
+2015-02-24 18:37:39,370 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.ShutdownModule
+2015-02-24 18:37:39,370 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:37:39,370 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:37:39,370 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomsonreuters.injection.module.MainModule
+2015-02-24 18:37:39,370 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomsonreuters.injection.module.MainModule
+2015-02-24 18:37:39,370 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomsonreuters.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:37:39,374 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomsonreuters.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:37:39,525 INFO main com.netflix.karyon.jersey.blocking.PropertiesBasedResourceConfig - Packages to scan by jersey [com.thomsonreuters.rest]
+2015-02-24 18:37:39,922 INFO main com.netflix.karyon.jersey.blocking.JerseyBasedRouter - Started Jersey based request router.
+2015-02-24 18:37:40,070 INFO main io.reactivex.netty.server.AbstractServer - Rx server started at port: 7001
+2015-02-24 18:37:40,070 INFO main com.netflix.karyon.transport.http.HttpRxServerProvider - Starting server karyonJerseyModule on port 7001...
+2015-02-24 18:37:40,078 INFO main com.thomsonreuters.handler.HealthCheck - Health check initialized.
+2015-02-24 18:37:40,085 INFO main io.reactivex.netty.server.AbstractServer - Rx server started at port: 7002
+2015-02-24 18:37:40,089 WARN main com.netflix.appinfo.PropertiesInstanceConfig - Cannot find the properties specified : eureka-client. This may be okay if there are other environment specific properties or the configuration is installed with a different mechanism.
+2015-02-24 18:37:48,304 INFO main com.netflix.appinfo.CloudInstanceConfig - Datacenter is: Amazon
+2015-02-24 18:37:48,311 INFO main com.netflix.appinfo.providers.EurekaConfigBasedInstanceInfoProvider - Setting initial instance status as: STARTING
+2015-02-24 18:37:48,319 WARN main com.netflix.discovery.DefaultEurekaClientConfig - Cannot find the properties specified : eureka-client. This may be okay if there are other environment specific properties or the configuration is installed with a different mechanism.
+2015-02-24 18:37:48,349 WARN main com.netflix.discovery.DiscoveryClient - DISCOVERY: Could not pick a zone based on preferred zone settings. My zone - default, preferSameZone- false. Defaulting to default
+2015-02-24 18:37:48,633 INFO main com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2015-02-24 18:37:48,634 INFO main com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2015-02-24 18:37:48,634 INFO main com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2015-02-24 18:37:48,634 INFO main com.netflix.discovery.DiscoveryClient - Application is null : false
+2015-02-24 18:37:48,634 INFO main com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2015-02-24 18:37:48,634 INFO main com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2015-02-24 18:37:49,101 INFO main com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/ with status code 200.
+2015-02-24 18:37:49,101 INFO main com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2015-02-24 18:37:49,207 INFO main com.netflix.discovery.DiscoveryClient - The response status is 200
+2015-02-24 18:37:49,208 INFO main com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2015-02-24 18:38:19,362 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:38:19,365 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_6_, is fetching remote regions? false 
+2015-02-24 18:38:19,517 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 404.
+2015-02-24 18:38:19,517 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - Re-registering apps/1P_SERVICE_TEMPLATE
+2015-02-24 18:38:19,518 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140: registering service...
+2015-02-24 18:38:19,687 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE with status code 204.
+2015-02-24 18:38:19,687 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - registration status: 204
+2015-02-24 18:38:37,384 INFO DiscoveryClient-2 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:38:37,385 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - retransmit instance info with status UP
+2015-02-24 18:38:37,385 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140: registering service...
+2015-02-24 18:38:37,545 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE with status code 204.
+2015-02-24 18:38:37,545 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - registration status: 204
+2015-02-24 18:38:49,663 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:38:49,665 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:38:49,847 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 404.
+2015-02-24 18:38:49,847 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - Re-registering apps/1P_SERVICE_TEMPLATE
+2015-02-24 18:38:49,847 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140: registering service...
+2015-02-24 18:38:50,147 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE with status code 204.
+2015-02-24 18:38:50,148 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - registration status: 204
+2015-02-24 18:39:15,761 INFO DiscoveryClient-1 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:39:20,362 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:39:20,365 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:39:20,534 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:48:44,081 WARN main com.netflix.governator.lifecycle.ClasspathScanner - No base packages specified - no classpath scanning will be done
+2015-02-24 18:48:44,128 WARN main com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2015-02-24 18:48:44,128 INFO main com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2015-02-24 18:48:44,146 INFO main com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@2d710f1a
+2015-02-24 18:48:44,323 INFO main com.thomsonreuters.karyon.archaius.ZKDefaultPropertiesLoader - Loading application properties with app id: 1p-service-template and environment: null
+2015-02-24 18:48:44,344 INFO main com.netflix.config.util.ConfigurationUtils - Loaded properties file file:/Users/suman/workspace/1p-service-template/bin/1p-service-template.properties
+2015-02-24 18:48:44,357 WARN main com.thomsonreuters.karyon.archaius.ZKDefaultPropertiesLoader - Zookeeper quorum or configuration root is not set! {quorum: '', root: '/1p-service-template/config'}
+2015-02-24 18:48:44,376 INFO main org.hibernate.validator.util.Version - Hibernate Validator 4.1.0.Final
+2015-02-24 18:48:44,398 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.ShutdownModule
+2015-02-24 18:48:44,398 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.ShutdownModule
+2015-02-24 18:48:44,398 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:48:44,398 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.netflix.karyon.eureka.KaryonEurekaModule
+2015-02-24 18:48:44,398 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomsonreuters.injection.module.MainModule
+2015-02-24 18:48:44,398 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomsonreuters.injection.module.MainModule
+2015-02-24 18:48:44,398 INFO main com.netflix.governator.guice.ModuleListBuilder - Getting instace of : com.thomsonreuters.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:48:44,402 INFO main com.netflix.governator.guice.ModuleListBuilder - Adding module 'com.thomsonreuters.injection.BootstrapInjectionModule$KaryonRxRouterModuleImpl
+2015-02-24 18:48:44,557 INFO main com.netflix.karyon.jersey.blocking.PropertiesBasedResourceConfig - Packages to scan by jersey [com.thomsonreuters.rest]
+2015-02-24 18:48:44,951 INFO main com.netflix.karyon.jersey.blocking.JerseyBasedRouter - Started Jersey based request router.
+2015-02-24 18:48:45,103 INFO main io.reactivex.netty.server.AbstractServer - Rx server started at port: 7001
+2015-02-24 18:48:45,103 INFO main com.netflix.karyon.transport.http.HttpRxServerProvider - Starting server karyonJerseyModule on port 7001...
+2015-02-24 18:48:45,110 INFO main com.thomsonreuters.handler.HealthCheck - Health check initialized.
+2015-02-24 18:48:45,119 INFO main io.reactivex.netty.server.AbstractServer - Rx server started at port: 7002
+2015-02-24 18:48:45,123 WARN main com.netflix.appinfo.PropertiesInstanceConfig - Cannot find the properties specified : eureka-client. This may be okay if there are other environment specific properties or the configuration is installed with a different mechanism.
+2015-02-24 18:48:53,328 INFO main com.netflix.appinfo.CloudInstanceConfig - Datacenter is: Amazon
+2015-02-24 18:48:53,335 INFO main com.netflix.appinfo.providers.EurekaConfigBasedInstanceInfoProvider - Setting initial instance status as: STARTING
+2015-02-24 18:48:53,344 WARN main com.netflix.discovery.DefaultEurekaClientConfig - Cannot find the properties specified : eureka-client. This may be okay if there are other environment specific properties or the configuration is installed with a different mechanism.
+2015-02-24 18:48:53,375 WARN main com.netflix.discovery.DiscoveryClient - DISCOVERY: Could not pick a zone based on preferred zone settings. My zone - default, preferSameZone- false. Defaulting to default
+2015-02-24 18:48:53,662 INFO main com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2015-02-24 18:48:53,662 INFO main com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2015-02-24 18:48:53,662 INFO main com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2015-02-24 18:48:53,662 INFO main com.netflix.discovery.DiscoveryClient - Application is null : false
+2015-02-24 18:48:53,662 INFO main com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2015-02-24 18:48:53,662 INFO main com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2015-02-24 18:48:54,130 INFO main com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/ with status code 200.
+2015-02-24 18:48:54,130 INFO main com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2015-02-24 18:48:54,241 INFO main com.netflix.discovery.DiscoveryClient - The response status is 200
+2015-02-24 18:48:54,243 INFO main com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2015-02-24 18:49:24,398 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:49:24,401 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_6_, is fetching remote regions? false 
+2015-02-24 18:49:24,553 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 404.
+2015-02-24 18:49:24,553 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - Re-registering apps/1P_SERVICE_TEMPLATE
+2015-02-24 18:49:24,553 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140: registering service...
+2015-02-24 18:49:24,721 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE with status code 204.
+2015-02-24 18:49:24,721 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - registration status: 204
+2015-02-24 18:49:42,431 INFO DiscoveryClient-2 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:49:42,431 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - retransmit instance info with status UP
+2015-02-24 18:49:42,431 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140: registering service...
+2015-02-24 18:49:42,587 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE with status code 204.
+2015-02-24 18:49:42,587 INFO DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - registration status: 204
+2015-02-24 18:49:54,786 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:49:54,789 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:49:55,022 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 404.
+2015-02-24 18:49:55,022 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - Re-registering apps/1P_SERVICE_TEMPLATE
+2015-02-24 18:49:55,022 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140: registering service...
+2015-02-24 18:49:55,178 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE with status code 204.
+2015-02-24 18:49:55,178 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - DiscoveryClient_1P_SERVICE_TEMPLATE/10.212.139.140 - registration status: 204
+2015-02-24 18:50:20,785 INFO DiscoveryClient-1 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:50:25,015 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:50:25,018 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:50:25,334 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:50:55,176 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:50:55,177 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:50:55,488 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:50:58,963 INFO DiscoveryClient-0 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:51:25,333 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:51:25,336 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:51:25,644 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:51:37,149 INFO DiscoveryClient-2 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:51:55,489 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:51:55,491 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:51:55,799 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:52:15,332 INFO DiscoveryClient-1 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:52:25,648 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:52:25,650 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:52:25,953 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:52:53,531 INFO DiscoveryClient-3 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:52:55,808 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:52:55,810 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:52:56,111 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:53:25,967 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:53:25,969 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:53:26,268 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:53:31,704 INFO DiscoveryClient-0 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:53:53,369 WARN DiscoveryClient-2 com.netflix.discovery.DiscoveryClient - DISCOVERY: Could not pick a zone based on preferred zone settings. My zone - default, preferSameZone- false. Defaulting to default
+2015-02-24 18:53:56,121 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:53:56,122 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:53:56,423 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:54:09,878 INFO DiscoveryClient-0 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:54:26,279 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:54:26,280 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:54:26,594 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:54:48,068 INFO DiscoveryClient-1 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:54:56,435 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:54:56,436 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:54:56,750 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:55:26,267 INFO DiscoveryClient-3 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:55:26,591 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:55:26,592 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:55:26,903 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:55:56,817 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:55:56,818 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:55:57,059 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:56:04,481 INFO DiscoveryClient-2 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:56:26,975 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:56:26,976 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:56:27,213 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:56:42,691 INFO DiscoveryClient-1 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:56:57,200 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:56:57,201 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:56:57,367 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:57:20,864 INFO DiscoveryClient-3 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:57:27,358 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:57:27,359 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:57:27,523 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:57:57,584 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:57:57,584 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:57:57,901 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:57:59,056 INFO DiscoveryClient-0 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:58:27,738 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:58:27,739 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:58:28,056 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:58:37,263 INFO DiscoveryClient-1 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:58:53,362 WARN DiscoveryClient-0 com.netflix.discovery.DiscoveryClient - DISCOVERY: Could not pick a zone based on preferred zone settings. My zone - default, preferSameZone- false. Defaulting to default
+2015-02-24 18:58:57,894 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:58:57,894 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:58:58,212 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:59:15,458 INFO DiscoveryClient-1 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:59:28,048 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:59:28,049 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:59:28,367 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 18:59:53,662 INFO DiscoveryClient-2 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 18:59:58,273 INFO pool-4-thread-1 org.apache.http.impl.client.DefaultHttpClient - I/O exception (org.apache.http.NoHttpResponseException) caught when processing request: The target server failed to respond
+2015-02-24 18:59:58,273 INFO pool-4-thread-1 org.apache.http.impl.client.DefaultHttpClient - Retrying request
+2015-02-24 18:59:58,651 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 18:59:58,651 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 18:59:58,667 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 19:00:28,827 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 19:00:28,829 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 19:00:28,830 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 19:00:31,840 INFO DiscoveryClient-3 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 19:00:59,064 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 19:00:59,502 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 19:00:59,502 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 19:01:10,028 INFO DiscoveryClient-2 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 19:01:29,220 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 19:01:29,658 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 19:01:29,659 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 
+2015-02-24 19:01:51,211 INFO DiscoveryClient-0 com.thomsonreuters.handler.HealthCheck - Health check called.
+2015-02-24 19:01:59,378 INFO pool-3-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/1P_SERVICE_TEMPLATE/10.212.139.140 with status code 200.
+2015-02-24 19:01:59,814 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Finished a call to service url http://eureka-integration-3-577874018.us-west-2.elb.amazonaws.com/v2/ and url path apps/delta with status code 200.
+2015-02-24 19:01:59,815 INFO pool-4-thread-1 com.netflix.discovery.DiscoveryClient - Completed cache refresh task for discovery. All Apps hash code is Local region apps hashcode: UP_7_, is fetching remote regions? false 

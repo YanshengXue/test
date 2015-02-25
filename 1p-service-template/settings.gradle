@@ -1,0 +1,3 @@
+rootProject.name='1p-service-template'
+include ':1p-service-lib'
+project(':1p-service-lib').projectDir = new File(settingsDir, '../1p-service-lib')
