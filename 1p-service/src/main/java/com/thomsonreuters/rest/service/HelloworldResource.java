@@ -53,7 +53,7 @@ public class HelloworldResource {
     public Response hello() {
         JSONObject response = new JSONObject();
         try {
-            response.put("Message", "Hello from Netflix OSS");
+            response.put("Message", "Hello from One platform");
             return Response.ok(response.toString()).build();
         } catch (JSONException e) {
             logger.error("Error creating json response.", e);
