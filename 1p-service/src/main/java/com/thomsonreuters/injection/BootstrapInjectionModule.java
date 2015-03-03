@@ -1,12 +1,14 @@
 package com.thomsonreuters.injection;
 
 import com.google.inject.Singleton;
+import com.netflix.adminresources.resources.KaryonWebAdminModule;
 import com.netflix.config.ConfigurationManager;
 import com.netflix.governator.annotations.Modules;
 import com.netflix.karyon.KaryonBootstrap;
 import com.netflix.karyon.ShutdownModule;
 import com.netflix.karyon.eureka.KaryonEurekaModule;
 import com.netflix.karyon.jersey.blocking.KaryonJerseyModule;
+import com.netflix.karyon.servo.KaryonServoModule;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.karyon.archaius.ZKArchaiusBootstrap;
@@ -17,8 +19,8 @@ import com.thomsonreuters.karyon.archaius.ZKArchaiusBootstrap;
 @Singleton
 @Modules(include = {
         ShutdownModule.class,
-        //KaryonServoModule.class,
-        //KaryonWebAdminModule.class,
+        KaryonServoModule.class,
+        KaryonWebAdminModule.class,
         KaryonEurekaModule.class,
         MainModule.class,
         BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
