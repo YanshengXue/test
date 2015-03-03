@@ -31,4 +31,4 @@ else
 	location of your Java installation."
 fi
 
-exec "$JAVACMD" $JAVA_OPTS -Xmx1400m -XX:MaxPermSize=256m com.thomson.server.ServerRunner 2>&1 | tee log/output.log
+exec "$JAVACMD" $JAVA_OPTS -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner 2>&1 | tee log/output.log
