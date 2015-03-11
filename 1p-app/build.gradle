@@ -1,0 +1,94 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'aws-s3'
+apply plugin: 'com.moowork.gulp'
+apply plugin: 'jetty'
+apply plugin: 'os-package'
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}
+
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'http://public-maven.classmethod.info/release' }
+    }
+    dependencies {
+        classpath 'com.moowork.gradle:gradle-gulp-plugin:0.1'
+        classpath 'jp.classmethod.aws:gradle-aws-plugin:0.10'
+        classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.2.0'
+    }
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+//Change the env as required
+def chosenEnv
+if ( System.getenv("POC_ENVIRONMENT") ) { chosenEnv = System.getenv("POC_ENVIRONMENT") } else { chosenEnv = "integration" }
+	
+  
+dependencies {
+	compile project(':1p-service-lib')
+}
+
+def webXml    = 'dist/webapp/WEB-INF/web.xml'
+def startPort = 8084
+def stopPort  = 8085
+
+jettyRunWar.contextPath = '1p-app'
+jettyRun.contextPath = '1p-app'
+
+jettyRunWar.httpPort = startPort
+jettyRunWar.stopPort = stopPort
+jettyRunWar.stopKey  = 'stopKey'
+jettyStop.stopPort   = stopPort
+jettyStop.stopKey    = 'stopKey'
+
+jettyRun.httpPort    = startPort
+jettyRun.stopPort    = stopPort
+jettyRun.stopKey     = 'stopKey'
+
+jettyRun.webAppSourceDirectory = file('dist')
+jettyRun.webXml = file( webXml )
+
+node {
+    // Version of node to use.
+    version = '0.10.22'
+
+    // Enabled the automatic download. False is the default (for now).
+    download = true
+}
+
+sourceSets {
+	main {
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+}
+
+
+war {
+	from ('dist/app') {
+		include 'index.html'
+		include 'WEB-INF/**/*.xml'
+	}
+}
+
+ospackage {
+
+    requires('oracle-java8-installer')
+    requires('jetty8')
+    from( war ) {
+        into('/var/lib/jetty8/webapps')
+        rename(/.*\.war/, '1p-app.war')
+    }
+
+    postInstall("perl -p -i -e 's#-Darchaius\\.deployment\\.environment=[\\w]*#-Darchaius\\.deployment\\.environment=" + chosenEnv + "#g' /etc/default/jetty8")
+}
