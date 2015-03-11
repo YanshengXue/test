@@ -1,0 +1,3 @@
+rootProject.name='1p-project-templates'
+include '1p-service', '1p-service-lib' , '1p-app'
+
