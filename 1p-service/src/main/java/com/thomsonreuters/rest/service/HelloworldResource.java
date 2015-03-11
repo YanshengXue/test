@@ -27,7 +27,7 @@ public class HelloworldResource {
         JSONObject response = new JSONObject();
         try {
             response.put("Message", "Hello " + name + " from One platform");
-            return Response.ok(response.toString()).build();
+            return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
         } catch (JSONException e) {
             logger.error("Error creating json response.", e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -41,7 +41,7 @@ public class HelloworldResource {
         JSONObject response = new JSONObject();
         try {
             response.put("Message", "Hello " + name + " from One platform");
-            return Response.ok(response.toString()).build();
+            return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
         } catch (JSONException e) {
             logger.error("Error creating json response.", e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -54,7 +54,7 @@ public class HelloworldResource {
         JSONObject response = new JSONObject();
         try {
             response.put("Message", "Hello from One platform");
-            return Response.ok(response.toString()).build();
+            return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
         } catch (JSONException e) {
             logger.error("Error creating json response.", e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
