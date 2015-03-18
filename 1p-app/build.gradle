@@ -27,6 +27,9 @@ buildscript {
 repositories {
 	mavenCentral()
 	jcenter()
+  maven {
+    url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/snapshots"
+  }
 }
 //Change the env as required
 def chosenEnv
@@ -34,7 +37,7 @@ if ( System.getenv("POC_ENVIRONMENT") ) { chosenEnv = System.getenv("POC_ENVIRON
 	
   
 dependencies {
-	compile project(':1p-service-lib')
+  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.1.+'
 }
 
 def webXml    = 'dist/webapp/WEB-INF/web.xml'
