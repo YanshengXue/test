@@ -1,7 +1,7 @@
 package com.thomsonreuters.handler;
 
 import com.google.inject.Singleton;
-import com.netflix.karyon.health.HealthCheckHandler;
+import netflix.karyon.health.HealthCheckHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

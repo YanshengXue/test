@@ -1,7 +1,7 @@
 package com.thomsonreuters.rest.service;
 
 import com.google.inject.Inject;
-import com.netflix.karyon.health.HealthCheckHandler;
+import netflix.karyon.health.HealthCheckHandler;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;

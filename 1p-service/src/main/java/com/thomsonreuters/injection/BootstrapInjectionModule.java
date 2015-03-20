@@ -1,26 +1,29 @@
 package com.thomsonreuters.injection;
 
 import com.google.inject.Singleton;
-import com.netflix.adminresources.resources.KaryonWebAdminModule;
+
+import netflix.adminresources.resources.KaryonWebAdminModule;
+
 import com.netflix.config.ConfigurationManager;
 import com.netflix.governator.annotations.Modules;
-import com.netflix.karyon.KaryonBootstrap;
-import com.netflix.karyon.ShutdownModule;
-import com.netflix.karyon.eureka.KaryonEurekaModule;
-import com.netflix.karyon.jersey.blocking.KaryonJerseyModule;
-import com.netflix.karyon.servo.KaryonServoModule;
+
+import netflix.karyon.KaryonBootstrap;
+import netflix.karyon.ShutdownModule;
+import netflix.karyon.archaius.ArchaiusBootstrap;
+import netflix.karyon.eureka.KaryonEurekaModule;
+import netflix.karyon.jersey.blocking.KaryonJerseyModule;
+import netflix.karyon.servo.KaryonServoModule;
+
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
-import com.thomsonreuters.karyon.archaius.ZKArchaiusBootstrap;
 
-
+@ArchaiusBootstrap
 @KaryonBootstrap(name = "1p-service", healthcheck = HealthCheck.class)
-@ZKArchaiusBootstrap(root = "/1p-service/config", sessionTimeout = 30000, connectionTimeout = 15000 )
 @Singleton
 @Modules(include = {
         ShutdownModule.class,
         KaryonServoModule.class,
-        KaryonWebAdminModule.class,
+        //KaryonWebAdminModule.class,
         KaryonEurekaModule.class,
         MainModule.class,
         BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,

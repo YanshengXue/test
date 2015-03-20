@@ -35,5 +35,5 @@ eclipse {
 }
 
 dependencies {
-  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.1.+'
+  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.2.+'
 }
