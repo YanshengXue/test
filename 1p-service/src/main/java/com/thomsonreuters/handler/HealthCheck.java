@@ -1,12 +1,13 @@
 package com.thomsonreuters.handler;
 
-import com.google.inject.Singleton;
+import javax.annotation.PostConstruct;
+
 import netflix.karyon.health.HealthCheckHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
+import com.google.inject.Singleton;
 
 @Singleton
 public class HealthCheck implements HealthCheckHandler {
