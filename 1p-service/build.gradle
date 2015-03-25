@@ -23,9 +23,15 @@ buildscript {
 repositories {
    mavenCentral()
    jcenter()
-   maven {
-     url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/snapshots"
-   }
+    maven {
+      url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/thirdparty/"
+    }
+    maven {
+      url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/snapshots/"
+    }
+    maven {
+      url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/releases/"
+    }
 }
 
 eclipse {
@@ -35,5 +41,7 @@ eclipse {
 }
 
 dependencies {
-  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.2.+'
+  compile (group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.4.1-SNAPSHOT') {
+    exclude group: 'javax.servlet'
+  }
 }

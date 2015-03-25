@@ -1,5 +1,6 @@
 package com.thomsonreuters.injection;
 
+import netflix.adminresources.resources.KaryonWebAdminModule;
 import netflix.karyon.KaryonBootstrap;
 import netflix.karyon.ShutdownModule;
 import netflix.karyon.archaius.ArchaiusBootstrap;
@@ -19,7 +20,7 @@ import com.thomsonreuters.injection.module.MainModule;
 @Modules(include = {
         ShutdownModule.class,
         KaryonServoModule.class,
-        //KaryonWebAdminModule.class,
+        KaryonWebAdminModule.class,
         KaryonEurekaModule.class,
         MainModule.class,
         BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
