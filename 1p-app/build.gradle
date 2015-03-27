@@ -42,7 +42,7 @@ if ( System.getenv("POC_ENVIRONMENT") ) { chosenEnv = System.getenv("POC_ENVIRON
 	
   
 dependencies {
-  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.4.1-SNAPSHOT'
+  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: 'latest.integration'
 }
 
 def webXml    = 'dist/webapp/WEB-INF/web.xml'
