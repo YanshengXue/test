@@ -10,6 +10,10 @@ sourceCompatibility = 1.8
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
 }
+
+def chosenEnv
+if ( System.getenv("POC_ENVIRONMENT") ) { chosenEnv = System.getenv("POC_ENVIRONMENT") } else { chosenEnv = "integration" }
+
 buildscript {
     repositories {
         jcenter()
