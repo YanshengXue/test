@@ -65,6 +65,7 @@ distributions {
 ospackage {
   version = '0.0.1-SNAPSHOT'
   requires('oracle-java8-installer')
+  requires('git')
   postInstall("echo 'export JAVA_OPTS=\"-DdisableEmbeddedCassandra=true -Deiddo.repo.name=1p-service -Deiddo.repo.dir=./conf -Deureka.environment=${chosenEnv} -Darchaius.deployment.environment=${chosenEnv}\"' >> /opt/"+ name +"-"+ version +"/setenv.sh")
   postInstall("echo 'JAVA_HOME=/usr/lib/jvm/java-8-oracle'  >> /opt/"+ name +"-"+ version +"/setenv.sh")
 
