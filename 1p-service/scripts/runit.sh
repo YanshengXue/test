@@ -9,6 +9,13 @@ if [ -r "./setenv.sh" ]; then
   . "./setenv.sh"
 fi
 
+# ensure eiddo repo cloned (if does not exists) or up-to-date (if exists)
+if [ ! -d ./conf/.git ]; then
+  #clone from slave ELB if no git repo yet (optionally provide branch name parameter -b <name>)
+  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service ./conf
+fi
+
+
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
