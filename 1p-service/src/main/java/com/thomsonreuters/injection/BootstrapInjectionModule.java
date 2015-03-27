@@ -11,10 +11,11 @@ import netflix.karyon.servo.KaryonServoModule;
 import com.google.inject.Singleton;
 import com.netflix.config.ConfigurationManager;
 import com.netflix.governator.annotations.Modules;
+import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
 
-@ArchaiusBootstrap(loader = ServicePropertiesLoader.class)
+@ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
 @KaryonBootstrap(name = "1p-service", healthcheck = HealthCheck.class)
 @Singleton
 @Modules(include = {
