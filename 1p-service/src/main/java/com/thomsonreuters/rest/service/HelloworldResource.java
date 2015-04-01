@@ -17,6 +17,7 @@ import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.netflix.config.ConfigurationManager;
 import com.netflix.governator.annotations.Configuration;
 
 @Singleton
@@ -39,7 +40,8 @@ public class HelloworldResource {
     public Response helloTo(@PathParam("name") String name) {
         JSONObject response = new JSONObject();
         try {
-            response.put("Message", "Hello " + name + " from " + appName.get());
+            response.put("Message", "Hello " + name + " from " + appName.get() + 
+                " running on instance " + ConfigurationManager.getDeploymentContext().getDeploymentServerId());
             return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
         } catch (JSONException e) {
             logger.error("Error creating json response.", e);

@@ -38,4 +38,6 @@ else
 	location of your Java installation."
 fi
 
-exec "$JAVACMD" $JAVA_OPTS -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner 2>&1 | tee log/output.log
+DEPL_ENV=-Darchaius.deployment.serverId=$(ec2metadata --instance-id) -Darchaius.deployment.region=$(ec2metadata --instance-id)
+
+exec "$JAVACMD" $JAVA_OPTS $DEPL_ENV -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner 2>&1 | tee log/output.log
