@@ -2,7 +2,6 @@ package com.thomsonreuters.injection;
 
 import netflix.adminresources.resources.KaryonWebAdminModule;
 import netflix.karyon.KaryonBootstrap;
-import netflix.karyon.ShutdownModule;
 import netflix.karyon.archaius.ArchaiusBootstrap;
 import netflix.karyon.eureka.KaryonEurekaModule;
 import netflix.karyon.jersey.blocking.KaryonJerseyModule;
@@ -14,6 +13,7 @@ import com.netflix.governator.annotations.Modules;
 import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
+import com.thomsonreuters.karyon.ShutdownModule;
 
 @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
 @KaryonBootstrap(name = "1p-service", healthcheck = HealthCheck.class)
