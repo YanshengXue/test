@@ -49,13 +49,11 @@ then
   for ((i=1; i<INST_COUNT; i++));
   do
     PORT="$((7001+i*2))"
-    JAVA_OPTS="$JAVA_OPTS -Deiddo.repo.dir=/home/ubuntu/conf-$PORT -Deureka.port=$PORT"
+    OVERRIDES="-Deiddo.repo.dir=/home/ubuntu/conf-$PORT -Deureka.port=$PORT -Dserver.port=$PORT -Dshutdown.port=$((7002+i*2))"
 	if [ ! -d "./conf-$i/.git" ]; then
 	  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service "/home/ubuntu/conf-$PORT"
 	fi
-    PORT_OPTS="-Dserver.port=$PORT -Dshutdown.port=$((7002+i*2))"
-    echo $PORT_OPTS
-    exec "$JAVACMD" $JAVA_OPTS $DEPL_ENV $PORT_OPTS -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner > "log/output-$PORT.log" &
+    exec "$JAVACMD" $JAVA_OPTS $DEPL_ENV $OVERRIDES -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner > "log/output-$PORT.log" &
   done
 fi
 
