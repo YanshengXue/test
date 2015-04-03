@@ -49,7 +49,7 @@ then
   for ((i=1; i<INST_COUNT; i++));
   do
     PORT="$((7001+i*2))"
-    OVERRIDES="-Deiddo.repo.dir=/home/ubuntu/conf-$PORT -Deureka.port=$PORT -Dserver.port=$PORT -Dshutdown.port=$((7002+i*2))"
+    OVERRIDES="-Deiddo.repo.dir=/home/ubuntu/conf-$PORT -Deureka.name=1P_SERVICE_TEMPLATE-$PORT -Deureka.port=$PORT -Dserver.port=$PORT -Dshutdown.port=$((PORT + 1))"
 	if [ ! -d "./conf-$i/.git" ]; then
 	  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service "/home/ubuntu/conf-$PORT"
 	fi
