@@ -46,7 +46,7 @@ if [ -z "$INST_COUNT" ]
 then
   exec "$JAVACMD" $JAVA_OPTS $DEPL_ENV -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner 2>&1 | tee log/output.log
 else
-  for i in {1..$INST_COUNT}
+  for i in {1..$((INST_COUNT))}
   do
     exec "$JAVACMD" $JAVA_OPTS $DEPL_ENV -Dserver.port=$((7000+i*2-1)) -Dshutdown.port=$((7000+i*2)) -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner 2>&1 | tee log/output.log
   done
