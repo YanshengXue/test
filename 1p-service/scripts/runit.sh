@@ -38,6 +38,25 @@ else
 	location of your Java installation."
 fi
 
-DEPL_ENV="-Darchaius.deployment.serverId=$(ec2metadata --instance-id) -Darchaius.deployment.region=$(ec2metadata --availability-zone)"
+EC2_REGION="$(ec2metadata --availability-zone | grep -Po '(us|sa|eu|ap)-(north|south)?(east|west)?-[0-9]+')"
+EC2_INSTANCE="$(ec2metadata --instance-id)"
+DEPL_ENV="-Darchaius.deployment.serverId=$EC2_INSTANCE -Darchaius.deployment.region=$EC2_REGION"
+INST_COUNT="$(aws ec2 --region=$EC2_REGION describe-tags --filters Name=resource-id,Values=$EC2_INSTANCE Name=key,Values=Instances --output text | cut -f5)"
 
+if [ ! -z "$INST_COUNT" ]
+then
+  echo "Running extra (($INST_COUNT-1)) instances in non-blocking fasion with own eiddo conf and log file"
+  for ((i=1; i<INST_COUNT; i++));
+  do
+    PORT="$((7001+i*2))"
+    OVERRIDES="-Deiddo.repo.dir=/home/ubuntu/conf-$PORT -Deureka.name=1P_SERVICE_TEMPLATE-$PORT -Deureka.port=$PORT -Dserver.port=$PORT -Dshutdown.port=$((PORT + 1))"
+	if [ ! -d "./conf-$i/.git" ]; then
+	  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service "/home/ubuntu/conf-$PORT"
+	fi
+    exec "$JAVACMD" $JAVA_OPTS $DEPL_ENV $OVERRIDES -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner > "log/output-$PORT.log" &
+  done
+fi
+
+echo "Running default instance"
 exec "$JAVACMD" $JAVA_OPTS $DEPL_ENV -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner 2>&1 | tee log/output.log
+
