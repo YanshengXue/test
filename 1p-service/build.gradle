@@ -45,7 +45,7 @@ eclipse {
 }
 
 dependencies {
-  compile (group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.5.14+') {
+  compile (group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.6.+') {
     exclude group: 'javax.servlet'
   }
 }
