@@ -10,6 +10,7 @@ import netflix.karyon.servo.KaryonServoModule;
 import com.google.inject.Singleton;
 import com.netflix.config.ConfigurationManager;
 import com.netflix.governator.annotations.Modules;
+import com.thomsonreuters.events.karyon.EventsModule;
 import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
@@ -23,6 +24,7 @@ import com.thomsonreuters.karyon.ShutdownModule;
         KaryonServoModule.class,
         KaryonWebAdminModule.class,
         KaryonEurekaModule.class,
+        EventsModule.class,
         MainModule.class,
         BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
 })
