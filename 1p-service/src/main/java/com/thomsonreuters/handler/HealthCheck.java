@@ -1,6 +1,7 @@
 package com.thomsonreuters.handler;
 
 import java.io.File;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -27,7 +28,7 @@ public class HealthCheck implements HealthCheckHandler {
       eiddo.addListener(new EiddoListener() {
         
         @Override
-        public void onRepoUpdated(File repoDir) {
+        public void onRepoChainUpdated(List<File> repoDir) {
           // TODO Auto-generated method stub
           
         }
