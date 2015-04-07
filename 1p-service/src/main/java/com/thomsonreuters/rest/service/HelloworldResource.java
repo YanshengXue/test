@@ -40,7 +40,9 @@ public class HelloworldResource {
     public Response helloTo(@PathParam("name") String name) {
         JSONObject response = new JSONObject();
         try {
-            response.put("Message", "Hello " + name + " from " + appName.get());
+           logger.info("Hello " + name + " from " + appName.get());
+          
+          response.put("Message", "Hello " + name + " from " + appName.get());
             return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
         } catch (JSONException e) {
             logger.error("Error creating json response.", e);
@@ -67,6 +69,10 @@ public class HelloworldResource {
     public Response hello() {
         JSONObject response = new JSONObject();
         try {
+          
+          logger.info("Hello from " + appName.get() + 
+                " running on instance " + ConfigurationManager.getDeploymentContext().getDeploymentServerId());
+          
             response.put("Message", "Hello from " + appName.get() + 
                 " running on instance " + ConfigurationManager.getDeploymentContext().getDeploymentServerId());
             return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
