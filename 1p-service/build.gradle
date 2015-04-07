@@ -45,9 +45,9 @@ eclipse {
 }
 
 dependencies {
-  compile (group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.6.+') {
+  compile (group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.7.+') {
     exclude group: 'javax.servlet'
-  }
+  }	
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
@@ -67,7 +67,7 @@ ospackage {
   requires('oracle-java8-installer')
   requires('git')
   requires('awscli')
-  postInstall("echo 'export JAVA_OPTS=\"-DdisableEmbeddedCassandra=true -Deiddo.repo.name=1p-service -Deiddo.repo.dir=./conf -Deureka.environment=${chosenEnv} -Darchaius.deployment.environment=${chosenEnv}\"' >> /opt/"+ name +"-"+ version +"/setenv.sh")
+  postInstall("echo 'export JAVA_OPTS=\"-DdisableEmbeddedCassandra=true -Deiddo.client.repoChain=1p-common,1p-service -Deureka.environment=${chosenEnv} -Darchaius.deployment.environment=${chosenEnv}\"' >> /opt/"+ name +"-"+ version +"/setenv.sh")
   postInstall("echo 'JAVA_HOME=/usr/lib/jvm/java-8-oracle'  >> /opt/"+ name +"-"+ version +"/setenv.sh")
 
   from( zipTree("build/distributions/"+ name +"-"+ version +".zip") ) {

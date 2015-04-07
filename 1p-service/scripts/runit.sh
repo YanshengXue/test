@@ -9,10 +9,14 @@ if [ -r "./setenv.sh" ]; then
   . "./setenv.sh"
 fi
 
-# ensure eiddo repo cloned (if does not exists) or up-to-date (if exists)
-if [ ! -d ./conf/.git ]; then
+# ensure eiddo repos are cloned (if do not exists) or up-to-date (if exists)
+if [ ! -d ./conf/1p-common/.git ]; then
   #clone from slave ELB if no git repo yet (optionally provide branch name parameter -b <name>)
-  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service ./conf
+  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-common ./conf/1p-common
+fi
+if [ ! -d ./conf/1p-service/.git ]; then
+  #clone from slave ELB if no git repo yet (optionally provide branch name parameter -b <name>)
+  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service ./conf/1p-service
 fi
 
 
@@ -50,8 +54,11 @@ then
   do
     PORT="$((7001+i*2))"
     OVERRIDES="-Deiddo.repo.dir=/home/ubuntu/conf-$PORT -Deureka.name=1P_SERVICE_TEMPLATE-$PORT -Deureka.port=$PORT -Dserver.port=$PORT -Dshutdown.port=$((PORT + 1))"
-	if [ ! -d "./conf-$i/.git" ]; then
-	  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service "/home/ubuntu/conf-$PORT"
+	if [ ! -d "./conf-$i/1p-common/.git" ]; then
+	  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service "/home/ubuntu/conf-$PORT/1p-common"
+	fi
+	if [ ! -d "./conf-$i/1p-service/.git" ]; then
+	  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service "/home/ubuntu/conf-$PORT/1p-service"
 	fi
     exec "$JAVACMD" $JAVA_OPTS $DEPL_ENV $OVERRIDES -Xmx1400m -XX:MaxPermSize=256m com.thomsonreuters.server.ServerRunner > "log/output-$PORT.log" &
   done
