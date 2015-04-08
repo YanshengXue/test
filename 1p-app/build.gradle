@@ -39,10 +39,14 @@ repositories {
 //Change the env as required
 def chosenEnv
 if ( System.getenv("POC_ENVIRONMENT") ) { chosenEnv = System.getenv("POC_ENVIRONMENT") } else { chosenEnv = "integration" }
-	
+
+configurations.all {     
+	resolutionStrategy.cacheDynamicVersionsFor 1, 'hours'     
+	resolutionStrategy.cacheChangingModulesFor 1, 'hours' 
+}	
   
 dependencies {
-  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.6.+'
+  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.7.+'
 }
 
 def webXml    = 'dist/webapp/WEB-INF/web.xml'
