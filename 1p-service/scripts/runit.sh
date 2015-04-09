@@ -53,7 +53,8 @@ then
   for ((i=1; i<INST_COUNT; i++));
   do
     PORT="$((7001+i*2))"
-    OVERRIDES="-Deiddo.repo.dir=/home/ubuntu/conf-$PORT -Deureka.name=1P_SERVICE_TEMPLATE-$PORT -Deureka.port=$PORT -Dserver.port=$PORT -Dshutdown.port=$((PORT + 1))"
+    ADMIN_PORT="$((8077+i))"
+    OVERRIDES="-Deiddo.repo.dir=/home/ubuntu/conf-$PORT -Deureka.name=1P_SERVICE_TEMPLATE-$PORT -Deureka.port=$PORT -Dserver.port=$PORT -Dshutdown.port=$((PORT + 1)) -Dnetflix.platform.admin.resources.port=$ADMIN_PORT"
 	if [ ! -d "./conf-$i/1p-common/.git" ]; then
 	  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service "/home/ubuntu/conf-$PORT/1p-common"
 	fi
