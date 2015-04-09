@@ -14,6 +14,11 @@ task wrapper(type: Wrapper) {
 def chosenEnv
 if ( System.getenv("POC_ENVIRONMENT") ) { chosenEnv = System.getenv("POC_ENVIRONMENT") } else { chosenEnv = "integration" }
 
+configurations.all {     
+	resolutionStrategy.cacheDynamicVersionsFor 1, 'hours'     
+	resolutionStrategy.cacheChangingModulesFor 1, 'hours' 
+}
+
 buildscript {
     repositories {
         jcenter()
