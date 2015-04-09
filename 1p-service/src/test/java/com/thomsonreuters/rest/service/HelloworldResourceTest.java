@@ -59,8 +59,8 @@ public class HelloworldResourceTest extends JerseyTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	  System.setProperty("eiddo.client.repoChain", "junit");
-    //System.setProperty("eiddo.repo.junit.urlTemplate", "https://eiddo.1p.thomsonreuters.com/r/junit");
-	  System.setProperty("eiddo.repo.junit.urlTemplate", "http://eiddo-1135711100.us-west-2.elb.amazonaws.com/r/junit");
+    System.setProperty("eiddo.repo.junit.urlTemplate", "https://eiddo.1p.thomsonreuters.com/r/junit");
+	  //System.setProperty("eiddo.repo.junit.urlTemplate", "http://eiddo-1135711100.us-west-2.elb.amazonaws.com/r/junit");
     System.setProperty("eiddo.repo.junit.username", "junit");
     System.setProperty("eiddo.repo.junit.password", "junit");
 		server = Karyon.forApplication(TestInjectionModule.class,
