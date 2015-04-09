@@ -48,6 +48,10 @@ sourceSets {
     }
 }
 
+test {
+  testLogging.showStandardStreams = true
+}
+
 repositories {
    mavenCentral()
    jcenter()
