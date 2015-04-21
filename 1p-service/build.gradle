@@ -29,6 +29,30 @@ buildscript {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+test {
+  //enable to see logging during gradle build
+  //testLogging.showStandardStreams = true
+}
+
 repositories {
    mavenCentral()
    jcenter()
@@ -51,6 +75,10 @@ eclipse {
 
 dependencies {
   compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.9.+'
+  testCompile group:  'junit', name: 'junit-dep', version: '4.11'
+  // Jersey test framework
+  testCompile 'com.sun.jersey.jersey-test-framework:jersey-test-framework-core:1.11'
+  testCompile 'com.sun.jersey.jersey-test-framework:jersey-test-framework-external:1.11'
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
