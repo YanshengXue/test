@@ -46,7 +46,7 @@ configurations.all {
 }	
   
 dependencies {
-  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.7.+'
+  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.9.+'
 }
 
 def webXml    = 'dist/webapp/WEB-INF/web.xml'

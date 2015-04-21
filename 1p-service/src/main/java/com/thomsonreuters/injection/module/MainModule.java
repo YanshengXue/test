@@ -9,13 +9,4 @@ public class MainModule extends AbstractModule {
     protected void configure() {
        //Guice bindings goes here
     }
-    
-    public static LifecycleInjectorBuilderSuite asSuite() {
-        return new LifecycleInjectorBuilderSuite() {
-            @Override
-            public void configure(LifecycleInjectorBuilder builder) {
-                builder.withAdditionalModules(new MainModule());
-            }
-        };
-    }
 }

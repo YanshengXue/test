@@ -50,9 +50,7 @@ eclipse {
 }
 
 dependencies {
-  compile (group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.7.+') {
-    exclude group: 'javax.servlet'
-  }	
+  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.9.+'
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
