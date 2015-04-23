@@ -1,0 +1,21 @@
+.idea/
+.gradle/
+*.iml
+*.ipr
+*.iws
+work/
+logs/
+.DS_Store
+build/
+target/
+.project
+.classpath
+eclipse-build
+*/.project
+*/.classpath
+*/eclipse-build
+/.settings/
+
+## netbeans ignores
+nb-configuration.xml
+nbactions.xml
