@@ -14,9 +14,9 @@ if [ ! -d ./conf/1p-common/.git ]; then
   #clone from slave ELB if no git repo yet (optionally provide branch name parameter -b <name>)
   git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-common ./conf/1p-common
 fi
-if [ ! -d ./conf/1p-service/.git ]; then
+if [ ! -d ./conf/@EIDDO_REPO@/.git ]; then
   #clone from slave ELB if no git repo yet (optionally provide branch name parameter -b <name>)
-  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/1p-service ./conf/1p-service
+  git clone git://internal-eiddo-slave-1852879765.us-west-2.elb.amazonaws.com/hystrix-service ./conf/@EIDDO_REPO@
 fi
 
 
