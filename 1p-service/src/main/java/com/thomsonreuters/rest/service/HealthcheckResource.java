@@ -18,23 +18,18 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Path("/healthcheck")
 public class HealthcheckResource {
 
-    private final HealthCheckHandler healthCheckHandler;
+  private final HealthCheckHandler healthCheckHandler;
 
-    @Inject
-    public HealthcheckResource(HealthCheckHandler healthCheckHandler) {
-        this.healthCheckHandler = healthCheckHandler;
-    }
+  @Inject
+  public HealthcheckResource(HealthCheckHandler healthCheckHandler) {
+    this.healthCheckHandler = healthCheckHandler;
+  }
 
-	@ApiOperation(value = "Health check",  
-		    notes = "Returns result of the health check" 
-	) 
-	@ApiResponses(value = { 
-		@ApiResponse(code = 200, message = "Healthy") 
-	  }
-	) 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response healthcheck() {
-        return Response.status(healthCheckHandler.getStatus()).build();
-    }
+  @ApiOperation(value = "Health check", notes = "Returns result of the health check")
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "Healthy") })
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response healthcheck() {
+    return Response.status(healthCheckHandler.getStatus()).build();
+  }
 }

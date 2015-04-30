@@ -24,61 +24,61 @@ import com.netflix.governator.annotations.Configuration;
 @Path("/hello")
 public class HelloworldResource {
 
-    private static final Logger logger = LoggerFactory.getLogger(HelloworldResource.class);
+  private static final Logger logger = LoggerFactory.getLogger(HelloworldResource.class);
 
-    @Configuration("1p.service.name") 
-    private Supplier<String> appName = Suppliers.ofInstance("One Platform");
-    
-    @Inject
-    public HelloworldResource() {
-      
-    }
-    
-    @Path("to/{name}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response helloTo(@PathParam("name") String name) {
-        JSONObject response = new JSONObject();
-        try {
-           logger.info("Hello " + name + " from " + appName.get());
-          
-          response.put("Message", "Hello " + name + " from " + appName.get());
-            return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
-        } catch (JSONException e) {
-            logger.error("Error creating json response.", e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+  @Configuration("1p.service.name")
+  private Supplier<String> appName = Suppliers.ofInstance("One Platform");
 
-    @Path("to/person")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response helloToPerson(String name) {
-        JSONObject response = new JSONObject();
-        try {
-            response.put("Message", "Hello " + name + " from " + appName.get());
-            return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
-        } catch (JSONException e) {
-            logger.error("Error creating json response.", e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+  @Inject
+  public HelloworldResource() {
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response hello() {
-        JSONObject response = new JSONObject();
-        try {
-          
-          logger.info("Hello from " + appName.get() + 
-                " running on instance " + ConfigurationManager.getDeploymentContext().getDeploymentServerId());
-          
-            response.put("Message", "Hello from " + appName.get() + 
-                " running on instance " + ConfigurationManager.getDeploymentContext().getDeploymentServerId());
-            return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
-        } catch (JSONException e) {
-            logger.error("Error creating json response.", e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
+  }
+
+  @Path("to/{name}")
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response helloTo(@PathParam("name") String name) {
+    JSONObject response = new JSONObject();
+    try {
+      logger.info("Hello " + name + " from " + appName.get());
+
+      response.put("Message", "Hello " + name + " from " + appName.get());
+      return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
+    } catch (JSONException e) {
+      logger.error("Error creating json response.", e);
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
+  }
+
+  @Path("to/person")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response helloToPerson(String name) {
+    JSONObject response = new JSONObject();
+    try {
+      response.put("Message", "Hello " + name + " from " + appName.get());
+      return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
+    } catch (JSONException e) {
+      logger.error("Error creating json response.", e);
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response hello() {
+    JSONObject response = new JSONObject();
+    try {
+
+      logger.info("Hello from " + appName.get() + " running on instance "
+          + ConfigurationManager.getDeploymentContext().getDeploymentServerId());
+
+      response.put("Message", "Hello from " + appName.get() + " running on instance "
+          + ConfigurationManager.getDeploymentContext().getDeploymentServerId());
+      return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
+    } catch (JSONException e) {
+      logger.error("Error creating json response.", e);
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 }
