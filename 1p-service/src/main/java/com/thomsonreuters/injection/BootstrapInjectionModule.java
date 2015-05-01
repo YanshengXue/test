@@ -25,7 +25,7 @@ import com.thomsonreuters.karyon.ShutdownModule;
         KaryonEurekaModule.class,
         EventsModule.class,
         MainModule.class,
-        KaryonJerseyRouterModule.class,
+        BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
 })
 public interface BootstrapInjectionModule {
   class KaryonRxRouterModuleImpl extends KaryonJerseyRouterModule {
