@@ -9,9 +9,11 @@ import netflix.karyon.transport.http.health.HealthCheckEndpoint;
 import rx.Observable;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.rest.service.HelloRequestHandler;
 
+@Singleton
 public class AppRouter implements RequestHandler<ByteBuf, ByteBuf> {
   private final SimpleUriRouter<ByteBuf, ByteBuf> delegate;
 

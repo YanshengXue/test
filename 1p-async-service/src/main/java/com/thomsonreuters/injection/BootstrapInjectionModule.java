@@ -1,19 +1,23 @@
 package com.thomsonreuters.injection;
 
+import io.netty.buffer.ByteBuf;
 import netflix.adminresources.resources.KaryonWebAdminModule;
 import netflix.karyon.KaryonBootstrap;
 import netflix.karyon.archaius.ArchaiusBootstrap;
 import netflix.karyon.eureka.KaryonEurekaModule;
 import netflix.karyon.servo.KaryonServoModule;
+import netflix.karyon.transport.http.KaryonHttpModule;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.netflix.config.ConfigurationManager;
 import com.netflix.governator.annotations.Modules;
 import com.sun.jersey.spi.resource.Singleton;
 import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.events.karyon.EventsModule;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
-import com.thomsonreuters.karyon.KaryonAsyncRouterModule;
+import com.thomsonreuters.karyon.AsyncHystrixStreamAwareHandlerProvider;
 import com.thomsonreuters.karyon.ShutdownModule;
 
 @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
@@ -29,17 +33,32 @@ import com.thomsonreuters.karyon.ShutdownModule;
         BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
 })
 public interface BootstrapInjectionModule {
-  class KaryonRxRouterModuleImpl extends KaryonAsyncRouterModule {
-    
+  class KaryonRxRouterModuleImpl extends KaryonHttpModule<ByteBuf, ByteBuf> {
+
     @Inject
-    public KaryonRxRouterModuleImpl(AppRouter router) {
-      super(router);
+    public KaryonRxRouterModuleImpl() {
+      super("karyonAsyncModule", ByteBuf.class, ByteBuf.class);
     }
     
     @Override
     protected void configureServer() {
-      //replace default behavior (port,pool size) if needed
-      super.configureServer();
+      int port = 7001;
+      if( ConfigurationManager.getConfigInstance().containsKey( "server.port" ) ) {
+        try {
+          port = Integer.parseInt( ConfigurationManager.getConfigInstance().getProperty( "server.port" ).toString() );
+        }
+        catch( NumberFormatException e ) {
+        }
+      }
+      
+      server().port( port );
+    }
+
+    
+    @Override
+    protected void configure() {
+      bindRouter().to(HystrixStreamAwareHandler.class);
+      super.configure();
     }
     
   }
