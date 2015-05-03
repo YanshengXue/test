@@ -1,9 +1,16 @@
 package com.thomsonreuters.rest.service;
 
 
-import java.io.IOException;
+import io.netty.buffer.ByteBuf;
+import io.netty.handler.logging.LogLevel;
+import io.reactivex.netty.RxNetty;
+import io.reactivex.netty.protocol.http.client.HttpClient;
+import io.reactivex.netty.protocol.http.client.HttpClientRequest;
+import io.reactivex.netty.protocol.http.client.HttpClientResponse;
 
-import javax.ws.rs.core.MediaType;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import netflix.karyon.Karyon;
 import netflix.karyon.KaryonBootstrap;
@@ -11,37 +18,31 @@ import netflix.karyon.KaryonServer;
 import netflix.karyon.ShutdownModule;
 import netflix.karyon.archaius.ArchaiusBootstrap;
 
-import org.codehaus.jettison.json.JSONException;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import rx.Observable;
+import rx.functions.Action1;
+import rx.functions.Func1;
+
 import com.google.inject.Singleton;
 import com.netflix.governator.annotations.Modules;
 import com.netflix.governator.guice.BootstrapModule;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.test.framework.AppDescriptor;
-import com.sun.jersey.test.framework.JerseyTest;
-import com.sun.jersey.test.framework.WebAppDescriptor;
 import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.BootstrapInjectionModule;
 import com.thomsonreuters.injection.module.MainModule;
-import com.thomsonreuters.rest.service.HelloworldResourceTest.TestInjectionModule.TestModule;
+import com.thomsonreuters.rest.service.HelloworldAsyncClientTest.TestInjectionModule.TestModule;
 
 /**
  * This is really an end-to-end test that verifies Eiddo properties are dynamically loaded.
  * @author yurgis
  *
  */
-public class HelloworldResourceTest extends JerseyTest {
+public class HelloworldAsyncClientTest {
 	private static final int PORT = 7001;
-	private static final String baseUrl = "http://localhost:" + PORT + "/";
 	private static KaryonServer server;
 
 	@ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
@@ -56,7 +57,6 @@ public class HelloworldResourceTest extends JerseyTest {
 
 			@Override
 			protected void configure() {
-				//bind(HealthCheck.class).toInstance(mockHealthCheck);
 			}
 		}
 	}
@@ -78,27 +78,41 @@ public class HelloworldResourceTest extends JerseyTest {
 		server.shutdown();
 	}
 	
-	public HelloworldResourceTest() {
-	    super("com.thomsonreuters.rest.service");
-	}
-
-	@Override
-	protected AppDescriptor configure() {
-		return new WebAppDescriptor.Builder().build();
+	public HelloworldAsyncClientTest() {
 	}
 
   @Test
-  public void testHello() throws JSONException, JsonProcessingException,
-      IOException {
-    WebResource webResource = client().resource(baseUrl);
-    ClientResponse response = webResource.path("/hello")
-        .accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
-    String json = response.getEntity(String.class);
-    ObjectMapper m = new ObjectMapper();
-    JsonNode root = m.readTree(json);
-    Assert.assertNotNull(root);
-    System.out.println(json);
-    Assert.assertTrue(json.contains("One Platform JUnit Overriden by Eiddo"));
+  public void testHello() throws Exception {
+    HttpClient<ByteBuf, ByteBuf> client = RxNetty.<ByteBuf, ByteBuf> newHttpClientBuilder("localhost", PORT)
+        .enableWireLogging(LogLevel.ERROR).build();
+    Observable<HttpClientResponse<ByteBuf>> response = client.submit(HttpClientRequest.createGet("/hello"));
+    final List<String> result = new ArrayList<String>();
+    response.flatMap(new Func1<HttpClientResponse<ByteBuf>, Observable<String>>() {
+      @Override
+      public Observable<String> call(HttpClientResponse<ByteBuf> response) {
+        return response.getContent().map(new Func1<ByteBuf, String>() {
+          @Override
+          public String call(ByteBuf byteBuf) {
+            return byteBuf.toString(Charset.forName("UTF-8"));
+          }
+        });
+      }
+    }).toBlocking().forEach(new Action1<String>() {
+
+      @Override
+      public void call(String t1) {
+        result.add(t1);
+      }
+    });
+    Assert.assertEquals("Response not found.", 1, result.size());
+
+    String message = result.get(0);
+
+    Assert.assertTrue("Invalid message from server", 
+        message.contains("One Platform"));
+    
+    Assert.assertTrue("Message must be overriden by Eiddo", 
+        message.contains("Overriden by Eiddo"));
   }
 	
 }

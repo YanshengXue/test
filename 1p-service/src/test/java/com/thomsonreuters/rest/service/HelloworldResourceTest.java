@@ -34,6 +34,11 @@ import com.thomsonreuters.injection.BootstrapInjectionModule;
 import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.rest.service.HelloworldResourceTest.TestInjectionModule.TestModule;
 
+/**
+ * This is really an end-to-end test that verifies Eiddo properties are dynamically loaded.
+ * @author yurgis
+ *
+ */
 public class HelloworldResourceTest extends JerseyTest {
 	private static final int PORT = 7001;
 	private static final String baseUrl = "http://localhost:" + PORT + "/";

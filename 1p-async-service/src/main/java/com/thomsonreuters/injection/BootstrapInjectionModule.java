@@ -9,7 +9,6 @@ import netflix.karyon.servo.KaryonServoModule;
 import netflix.karyon.transport.http.KaryonHttpModule;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.netflix.config.ConfigurationManager;
 import com.netflix.governator.annotations.Modules;
 import com.sun.jersey.spi.resource.Singleton;
@@ -17,7 +16,6 @@ import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.events.karyon.EventsModule;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
-import com.thomsonreuters.karyon.AsyncHystrixStreamAwareHandlerProvider;
 import com.thomsonreuters.karyon.ShutdownModule;
 
 @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
