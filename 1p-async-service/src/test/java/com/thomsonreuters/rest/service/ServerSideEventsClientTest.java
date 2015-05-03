@@ -1,18 +1,22 @@
 package com.thomsonreuters.rest.service;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.Unpooled;
+import io.netty.handler.codec.http.HttpHeaders;
 import io.reactivex.netty.RxNetty;
+import io.reactivex.netty.channel.ContentTransformer;
 import io.reactivex.netty.pipeline.PipelineConfigurators;
-import io.reactivex.netty.protocol.http.client.HttpClient;
 import io.reactivex.netty.protocol.http.client.HttpClientRequest;
 import io.reactivex.netty.protocol.http.client.HttpClientResponse;
 import io.reactivex.netty.protocol.http.server.HttpServerRequest;
 import io.reactivex.netty.protocol.http.server.HttpServerResponse;
 import io.reactivex.netty.protocol.http.server.RequestHandler;
 import io.reactivex.netty.protocol.http.sse.ServerSentEvent;
+import io.reactivex.netty.protocol.http.sse.ServerSentEventEncoder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -24,12 +28,11 @@ import netflix.karyon.archaius.ArchaiusBootstrap;
 import netflix.karyon.transport.http.KaryonHttpModule;
 
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import rx.Notification;
 import rx.Observable;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 import com.google.inject.Inject;
@@ -38,6 +41,7 @@ import com.netflix.governator.annotations.Modules;
 import com.netflix.governator.guice.BootstrapModule;
 import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
+import com.thomsonreuters.injection.AppRouter;
 import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.rest.service.ServerSideEventsClientTest.TestInjectionModule.TestModule;
 
@@ -46,8 +50,8 @@ import com.thomsonreuters.rest.service.ServerSideEventsClientTest.TestInjectionM
  *
  */
 public class ServerSideEventsClientTest {
-  private static final int INTERVAL = 1000;
-  private static final int TAKE_MAX_EVENT_COUNT = 100;
+  private static final int INTERVAL = 100;
+  private static final int MAX_EVENT_COUNT = 10;
   private static final int PORT = 7001;
   private static KaryonServer server;
 
@@ -67,11 +71,23 @@ public class ServerSideEventsClientTest {
       }
     }
 
-    class KaryonSSEModuleImpl extends KaryonHttpModule<ByteBuf, ServerSentEvent> {
+    class KaryonSSEModuleImpl extends KaryonHttpModule<ByteBuf, ByteBuf> {
 
+      private static final ServerSentEventEncoder sseEncoder = new ServerSentEventEncoder();
+      private static final ByteBuf data;
+      static {
+          final byte[] dataBytes = new byte[10 * 1024];
+          Arrays.fill(dataBytes, (byte) 'c');
+          data = Unpooled.buffer().writeBytes(dataBytes).retain();
+      }
+      
+      
+      private final AppRouter appRouter;
+      
       @Inject
-      public KaryonSSEModuleImpl() {
-        super("karyonSSEModule", ByteBuf.class, ServerSentEvent.class);
+      public KaryonSSEModuleImpl(AppRouter appRouter) {
+        super("karyonSSEModule", ByteBuf.class, ByteBuf.class);
+        this.appRouter = appRouter;
       }
 
       @Override
@@ -81,44 +97,61 @@ public class ServerSideEventsClientTest {
 
       @Override
       protected void configure() {
-        bindRouter().toInstance(new RequestHandler<ByteBuf, ServerSentEvent>() {
+        bindRouter().toInstance(new RequestHandler<ByteBuf, ByteBuf>() {
 
           @Override
           public Observable<Void> handle(HttpServerRequest<ByteBuf> request,
-              HttpServerResponse<ServerSentEvent> response) {
-            return getIntervalObservable(response);
+              HttpServerResponse<ByteBuf> response) {
+            String uri = request.getUri();
+            if ("/sse".equals(uri)) {
+              response.getHeaders().add(HttpHeaders.Names.CONTENT_TYPE, "text/eventstream");
+              return Observable.interval(INTERVAL, TimeUnit.MILLISECONDS).flatMap(new Func1<Long, Observable<Void>>() {
+                @Override
+                public Observable<Void> call(Long interval) {
+                  System.out.println("Writing SSE event for interval: " + interval);
+                  ByteBuf data = response.getAllocator().buffer().writeBytes(("hello " + interval).getBytes());
+                  ServerSentEvent event = new ServerSentEvent(data);
+                  
+                  return response.writeAndFlush(event, new SSETransformer());
+                }
+              });
+            } else {
+              return appRouter.handle(request, response);
+            }
           }
         });
-        bindPipelineConfigurator().toInstance(PipelineConfigurators.<ByteBuf>serveSseConfigurator());
         super.configure();
       }
 
-      private Observable<Void> getIntervalObservable(final HttpServerResponse<ServerSentEvent> response) {
-        return Observable.interval(INTERVAL, TimeUnit.MILLISECONDS).flatMap(new Func1<Long, Observable<Void>>() {
-          @Override
-          public Observable<Void> call(Long interval) {
-            System.out.println("Writing SSE event for interval: " + interval);
-            ByteBuf data = response.getAllocator().buffer().writeBytes(("hello " + interval).getBytes());
-            ServerSentEvent event = new ServerSentEvent(data);
-            return response.writeAndFlush(event);
+      private static class SSETransformer implements ContentTransformer<ServerSentEvent> {
+        private static final byte[] EVENT_PREFIX_BYTES = "event: ".getBytes();
+        private static final byte[] NEW_LINE_AS_BYTES = "\n".getBytes();
+        private static final byte[] ID_PREFIX_AS_BYTES = "id: ".getBytes();
+        private static final byte[] DATA_PREFIX_AS_BYTES = "data: ".getBytes();
+        
+        @Override
+        public ByteBuf call(ServerSentEvent serverSentEvent, ByteBufAllocator byteBufAllocator) {
+          ByteBuf out = byteBufAllocator.buffer(serverSentEvent.content().capacity());
+          if (serverSentEvent.hasEventType()) { // Write event type, if available
+            out.writeBytes(EVENT_PREFIX_BYTES);
+            out.writeBytes(serverSentEvent.getEventType());
+            out.writeBytes(NEW_LINE_AS_BYTES);
           }
-        }).materialize().takeWhile(new Func1<Notification<Void>, Boolean>() {
-          @Override
-          public Boolean call(Notification<Void> notification) {
-            if (notification.isOnError()) {
-              System.out.println("Write to client failed, stopping response sending.");
-              notification.getThrowable().printStackTrace(System.err);
-            }
-            return !notification.isOnError();
+  
+          if (serverSentEvent.hasEventId()) { // Write event id, if available
+            out.writeBytes(ID_PREFIX_AS_BYTES);
+            out.writeBytes(serverSentEvent.getEventId());
+            out.writeBytes(NEW_LINE_AS_BYTES);
           }
-        }).map(new Func1<Notification<Void>, Void>() {
-          @Override
-          public Void call(Notification<Void> notification) {
-            return null;
-          }
-        });
+          
+          out.writeBytes(DATA_PREFIX_AS_BYTES);
+          out.writeBytes(serverSentEvent.content());
+          out.writeBytes(NEW_LINE_AS_BYTES);
+          
+          System.out.println("sent as: '" + out.toString(Charset.forName("UTF-8")) + "'");
+          return out;
+       }
       }
-
     }
   }
 
@@ -138,28 +171,6 @@ public class ServerSideEventsClientTest {
   public ServerSideEventsClientTest() {
   }
 
-  public List<ServerSentEvent> readServerSideEvents() {
-    HttpClient<ByteBuf, ServerSentEvent> client = RxNetty.createHttpClient("localhost", PORT,
-        PipelineConfigurators.<ByteBuf> clientSseConfigurator());
-
-    Iterable<ServerSentEvent> eventIterable = client.submit(HttpClientRequest.createGet("/hello"))
-        .flatMap(new Func1<HttpClientResponse<ServerSentEvent>, Observable<ServerSentEvent>>() {
-          @Override
-          public Observable<ServerSentEvent> call(HttpClientResponse<ServerSentEvent> response) {
-            printResponseHeader(response);
-            return response.getContent();
-          }
-        }).take(TAKE_MAX_EVENT_COUNT).toBlocking().toIterable();
-
-    List<ServerSentEvent> events = new ArrayList<ServerSentEvent>();
-    for (ServerSentEvent event : eventIterable) {
-      System.out.println(event);
-      events.add(event);
-    }
-
-    return events;
-  }
-
   private static void printResponseHeader(HttpClientResponse<ServerSentEvent> response) {
     System.out.println("New response received.");
     System.out.println("========================");
@@ -172,8 +183,28 @@ public class ServerSideEventsClientTest {
 
   @Test
   public void testHello() throws Exception {
-    List<ServerSentEvent> events = readServerSideEvents();
-    Assert.assertEquals(TAKE_MAX_EVENT_COUNT, events.size());
+    System.out.println("Testing new SSE decoder. Server port: " + PORT);
+    Iterable<ServerSentEvent> eventIterable = RxNetty
+        .<ByteBuf, ServerSentEvent> newHttpClientBuilder("localhost", PORT)
+        .pipelineConfigurator(PipelineConfigurators.<ByteBuf> clientSseConfigurator()).build()
+        .submit(HttpClientRequest.createGet("/sse"))
+        .flatMap(new Func1<HttpClientResponse<ServerSentEvent>, Observable<ServerSentEvent>>() {
+          @Override
+          public Observable<ServerSentEvent> call(HttpClientResponse<ServerSentEvent> response) {
+            printResponseHeader(response);
+            return response.getContent().doOnNext(new Action1<ServerSentEvent>() {
+              @Override
+              public void call(ServerSentEvent serverSentEvent) {
+                serverSentEvent.retain();
+              }
+            });
+          }
+        }).take(MAX_EVENT_COUNT).toBlocking().toIterable();
+
+    for (ServerSentEvent event : eventIterable) {
+      System.out.println("Received sse '" + event.contentAsString() + "'");
+      event.release();
+    }
   }
 
 }
