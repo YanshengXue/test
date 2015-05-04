@@ -47,6 +47,23 @@ public class HandlerUtils {
 		return null;
 	}
 
+  public static int getIntParam(HttpServerRequest<ByteBuf> request, String name, int defaultValue) {
+    String value = getParam(request, name);
+    if (value != null) {
+      try {
+        return Integer.parseInt(value);
+      } catch (NumberFormatException ex) {
+        return defaultValue;
+      }
+    }
+    return defaultValue;
+  }
+
+  public static String getStringParam(HttpServerRequest<ByteBuf> request, String name, String defaultValue) {
+    String value = getParam(request, name);
+    return value != null? value : defaultValue;
+  }
+  
 	public static Map<String,String> getParamsAsMap(MultivaluedMap<String,String> query) {
 		Map<String,String> params = new HashMap<>();
 		

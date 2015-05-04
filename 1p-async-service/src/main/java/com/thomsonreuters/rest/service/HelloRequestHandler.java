@@ -46,6 +46,7 @@ public class HelloRequestHandler implements RequestHandler<ByteBuf, ByteBuf> {
   @Override
   public Observable<Void> handle(HttpServerRequest<ByteBuf> request, HttpServerResponse<ByteBuf> response) {
     try {
+      response.getHeaders().addHeader("Access-Control-Allow-Origin", "*");
       response.write(mapper.writeValueAsString(new HelloPOJO(appName.get())), StringTransformer.DEFAULT_INSTANCE);
 
       return response.close();

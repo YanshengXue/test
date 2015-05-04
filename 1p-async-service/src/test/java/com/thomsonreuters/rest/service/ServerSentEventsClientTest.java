@@ -44,14 +44,14 @@ import com.netflix.governator.guice.BootstrapModule;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.AppRouter;
 import com.thomsonreuters.injection.module.MainModule;
-import com.thomsonreuters.rest.service.ServerSideEventsClientTest.TestInjectionModule.TestModule;
+import com.thomsonreuters.rest.service.ServerSentEventsClientTest.TestInjectionModule.TestModule;
 
 /**
  * This is partly integration test as it verified app's router and hello resource
  * @author yurgis
  *
  */
-public class ServerSideEventsClientTest {
+public class ServerSentEventsClientTest {
   private static final int INTERVAL = 100;
   private static final int MAX_EVENT_COUNT = 10;
   private static final int PORT = 7001;
@@ -97,7 +97,8 @@ public class ServerSideEventsClientTest {
               HttpServerResponse<ByteBuf> response) {
             String uri = request.getUri();
             if ("/sse".equals(uri)) {
-              response.getHeaders().add(HttpHeaders.Names.CONTENT_TYPE, "text/eventstream");
+              response.getHeaders().add(HttpHeaders.Names.CONTENT_TYPE, "text/event-stream");
+              response.getHeaders().add(HttpHeaders.Names.CONTENT_LENGTH, "-1");
               return Observable.interval(INTERVAL, TimeUnit.MILLISECONDS).flatMap(new Func1<Long, Observable<Void>>() {
                 @Override
                 public Observable<Void> call(Long interval) {
@@ -116,35 +117,6 @@ public class ServerSideEventsClientTest {
         super.configure();
       }
 
-      private static class SSETransformer implements ContentTransformer<ServerSentEvent> {
-        private static final byte[] EVENT_PREFIX_BYTES = "event: ".getBytes();
-        private static final byte[] NEW_LINE_AS_BYTES = "\n".getBytes();
-        private static final byte[] ID_PREFIX_AS_BYTES = "id: ".getBytes();
-        private static final byte[] DATA_PREFIX_AS_BYTES = "data: ".getBytes();
-        
-        @Override
-        public ByteBuf call(ServerSentEvent serverSentEvent, ByteBufAllocator byteBufAllocator) {
-          ByteBuf out = byteBufAllocator.buffer(serverSentEvent.content().capacity());
-          if (serverSentEvent.hasEventType()) { // Write event type, if available
-            out.writeBytes(EVENT_PREFIX_BYTES);
-            out.writeBytes(serverSentEvent.getEventType());
-            out.writeBytes(NEW_LINE_AS_BYTES);
-          }
-  
-          if (serverSentEvent.hasEventId()) { // Write event id, if available
-            out.writeBytes(ID_PREFIX_AS_BYTES);
-            out.writeBytes(serverSentEvent.getEventId());
-            out.writeBytes(NEW_LINE_AS_BYTES);
-          }
-          
-          out.writeBytes(DATA_PREFIX_AS_BYTES);
-          out.writeBytes(serverSentEvent.content());
-          out.writeBytes(NEW_LINE_AS_BYTES);
-          
-          System.out.println("sent as: '" + out.toString(Charset.forName("UTF-8")) + "'");
-          return out;
-       }
-      }
     }
   }
 
@@ -160,7 +132,7 @@ public class ServerSideEventsClientTest {
     ShutdownUtil.shutdown();
   }
 
-  public ServerSideEventsClientTest() {
+  public ServerSentEventsClientTest() {
   }
 
   private static void printResponseHeader(HttpClientResponse<ServerSentEvent> response) {
@@ -193,10 +165,13 @@ public class ServerSideEventsClientTest {
           }
         }).take(MAX_EVENT_COUNT).toBlocking().toIterable();
 
+    int count = 0;
     for (ServerSentEvent event : eventIterable) {
       System.out.println("Received sse '" + event.contentAsString() + "'");
       event.release();
+      count++;
     }
+    Assert.assertEquals(MAX_EVENT_COUNT, count);
   }
 
   @Test
