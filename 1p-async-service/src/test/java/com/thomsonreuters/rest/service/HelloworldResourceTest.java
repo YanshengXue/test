@@ -1,6 +1,9 @@
 package com.thomsonreuters.rest.service;
 
 
+import io.reactivex.netty.RxNetty;
+import io.reactivex.netty.pipeline.PipelineConfigurators;
+
 import java.io.IOException;
 
 import javax.ws.rs.core.MediaType;
@@ -8,7 +11,6 @@ import javax.ws.rs.core.MediaType;
 import netflix.karyon.Karyon;
 import netflix.karyon.KaryonBootstrap;
 import netflix.karyon.KaryonServer;
-import netflix.karyon.ShutdownModule;
 import netflix.karyon.archaius.ArchaiusBootstrap;
 
 import org.codehaus.jettison.json.JSONException;
@@ -32,10 +34,10 @@ import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.BootstrapInjectionModule;
 import com.thomsonreuters.injection.module.MainModule;
+import com.thomsonreuters.karyon.ShutdownModule;
 import com.thomsonreuters.rest.service.HelloworldResourceTest.TestInjectionModule.TestModule;
 
 /**
- * This is really an end-to-end test that verifies Eiddo properties are dynamically loaded.
  * @author yurgis
  *
  */
@@ -44,10 +46,11 @@ public class HelloworldResourceTest extends JerseyTest {
 	private static final String baseUrl = "http://localhost:" + PORT + "/";
 	private static KaryonServer server;
 
-	@ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
+	@ArchaiusBootstrap
 	@KaryonBootstrap(name = "junit", healthcheck = HealthCheck.class)
 	@Singleton
-	@Modules(include = { ShutdownModule.class, 
+	@Modules(include = { 
+	    ShutdownModule.class, 
 			TestModule.class,
 			BootstrapInjectionModule.KaryonRxRouterModuleImpl.class, }
 	)
@@ -56,17 +59,12 @@ public class HelloworldResourceTest extends JerseyTest {
 
 			@Override
 			protected void configure() {
-				//bind(HealthCheck.class).toInstance(mockHealthCheck);
 			}
 		}
 	}
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	  System.setProperty("eiddo.client.repoChain", "junit");
-    System.setProperty("eiddo.repo.junit.urlTemplate", "https://eiddo.1p.thomsonreuters.com/r/junit");
-    System.setProperty("eiddo.repo.junit.username", "junit");
-    System.setProperty("eiddo.repo.junit.password", "junit");
 		server = Karyon.forApplication(TestInjectionModule.class,
 				(BootstrapModule[]) null);
 		server.start();
@@ -75,7 +73,7 @@ public class HelloworldResourceTest extends JerseyTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		server.shutdown();
+	  ShutdownUtil.shutdown();
 	}
 	
 	public HelloworldResourceTest() {
@@ -98,7 +96,7 @@ public class HelloworldResourceTest extends JerseyTest {
     JsonNode root = m.readTree(json);
     Assert.assertNotNull(root);
     System.out.println(json);
-    Assert.assertTrue(json.contains("One Platform JUnit Overriden by Eiddo"));
+    Assert.assertTrue(json.contains("One Platform"));
   }
 	
 }

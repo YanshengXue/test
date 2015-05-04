@@ -55,7 +55,7 @@ public class ServerSideEventsClientTest {
   private static final int PORT = 7001;
   private static KaryonServer server;
 
-  @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
+  @ArchaiusBootstrap()
   @KaryonBootstrap(name = "junit", healthcheck = HealthCheck.class)
   @Singleton
   @Modules(include = { 
@@ -73,15 +73,6 @@ public class ServerSideEventsClientTest {
 
     class KaryonSSEModuleImpl extends KaryonHttpModule<ByteBuf, ByteBuf> {
 
-      private static final ServerSentEventEncoder sseEncoder = new ServerSentEventEncoder();
-      private static final ByteBuf data;
-      static {
-          final byte[] dataBytes = new byte[10 * 1024];
-          Arrays.fill(dataBytes, (byte) 'c');
-          data = Unpooled.buffer().writeBytes(dataBytes).retain();
-      }
-      
-      
       private final AppRouter appRouter;
       
       @Inject
@@ -164,8 +155,7 @@ public class ServerSideEventsClientTest {
 
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
-    System.out.println("Karyon server shutting down");
-    server.shutdown();
+    ShutdownUtil.shutdown();
   }
 
   public ServerSideEventsClientTest() {
@@ -182,7 +172,7 @@ public class ServerSideEventsClientTest {
   }
 
   @Test
-  public void testHello() throws Exception {
+  public void testSSE() throws Exception {
     System.out.println("Testing new SSE decoder. Server port: " + PORT);
     Iterable<ServerSentEvent> eventIterable = RxNetty
         .<ByteBuf, ServerSentEvent> newHttpClientBuilder("localhost", PORT)

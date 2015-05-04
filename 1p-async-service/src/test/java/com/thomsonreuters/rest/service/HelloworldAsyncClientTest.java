@@ -75,7 +75,7 @@ public class HelloworldAsyncClientTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		server.shutdown();
+    ShutdownUtil.shutdown();
 	}
 	
 	public HelloworldAsyncClientTest() {

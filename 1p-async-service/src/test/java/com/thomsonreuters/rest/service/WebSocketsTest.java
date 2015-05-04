@@ -38,9 +38,6 @@ import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.rest.service.WebSocketsTest.TestInjectionModule.TestModule;
 
 /**
- * This is really an end-to-end test that verifies Eiddo properties are
- * dynamically loaded.
- * 
  * @author yurgis
  *
  */
@@ -50,7 +47,7 @@ public class WebSocketsTest {
   private static final int PORT = 7001;
   private static KaryonServer server;
 
-  @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
+  @ArchaiusBootstrap()
   @KaryonBootstrap(name = "junit", healthcheck = HealthCheck.class)
   @Singleton
   @Modules(include = { 
@@ -126,15 +123,15 @@ public class WebSocketsTest {
 
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
-    System.out.println("Karyon server shutting down");
-    server.shutdown();
+    ShutdownUtil.shutdown();
   }
 
   public WebSocketsTest() {
   }
 
-  public List<String> readServerSideEvents() {
 
+  @Test
+  public void testHello() throws Exception {
     Iterable<String> eventIterable = RxNetty.<TextWebSocketFrame, TextWebSocketFrame> newWebSocketClientBuilder("localhost", PORT)
         .build().connect()
         .flatMap(new Func1<ObservableConnection<TextWebSocketFrame, TextWebSocketFrame>, Observable<String>>() {
@@ -151,16 +148,10 @@ public class WebSocketsTest {
 
     List<String> events = new ArrayList<String>();
     for (String event : eventIterable) {
-      System.out.println(event);
+      System.out.println("Received event: " + event);
       events.add(event);
     }
     
-    return events;
-  }
-
-  @Test
-  public void testHello() throws Exception {
-    List<String> events = readServerSideEvents();
     Assert.assertEquals(TAKE_MAX_EVENT_COUNT, events.size());
   }
 
