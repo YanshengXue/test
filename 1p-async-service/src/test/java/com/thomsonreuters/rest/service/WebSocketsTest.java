@@ -38,6 +38,7 @@ import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.rest.service.WebSocketsTest.TestInjectionModule.TestModule;
 
 /**
+ * This is a pure functional self-contained test that verifies karion websocket module.
  * @author yurgis
  *
  */

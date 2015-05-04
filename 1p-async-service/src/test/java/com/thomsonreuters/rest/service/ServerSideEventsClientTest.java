@@ -2,21 +2,22 @@ package com.thomsonreuters.rest.service;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.HttpHeaders;
+import io.netty.handler.logging.LogLevel;
 import io.reactivex.netty.RxNetty;
 import io.reactivex.netty.channel.ContentTransformer;
 import io.reactivex.netty.pipeline.PipelineConfigurators;
+import io.reactivex.netty.protocol.http.client.HttpClient;
 import io.reactivex.netty.protocol.http.client.HttpClientRequest;
 import io.reactivex.netty.protocol.http.client.HttpClientResponse;
 import io.reactivex.netty.protocol.http.server.HttpServerRequest;
 import io.reactivex.netty.protocol.http.server.HttpServerResponse;
 import io.reactivex.netty.protocol.http.server.RequestHandler;
 import io.reactivex.netty.protocol.http.sse.ServerSentEvent;
-import io.reactivex.netty.protocol.http.sse.ServerSentEventEncoder;
 
 import java.nio.charset.Charset;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +29,7 @@ import netflix.karyon.archaius.ArchaiusBootstrap;
 import netflix.karyon.transport.http.KaryonHttpModule;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -39,13 +41,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.netflix.governator.annotations.Modules;
 import com.netflix.governator.guice.BootstrapModule;
-import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.AppRouter;
 import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.rest.service.ServerSideEventsClientTest.TestInjectionModule.TestModule;
 
 /**
+ * This is partly integration test as it verified app's router and hello resource
  * @author yurgis
  *
  */
@@ -197,4 +199,34 @@ public class ServerSideEventsClientTest {
     }
   }
 
+  @Test
+  public void testHello() throws Exception {
+    HttpClient<ByteBuf, ByteBuf> client = RxNetty.<ByteBuf, ByteBuf> newHttpClientBuilder("localhost", PORT)
+        .enableWireLogging(LogLevel.ERROR).build();
+    Observable<HttpClientResponse<ByteBuf>> response = client.submit(HttpClientRequest.createGet("/hello"));
+    final List<String> result = new ArrayList<String>();
+    response.flatMap(new Func1<HttpClientResponse<ByteBuf>, Observable<String>>() {
+      @Override
+      public Observable<String> call(HttpClientResponse<ByteBuf> response) {
+        return response.getContent().map(new Func1<ByteBuf, String>() {
+          @Override
+          public String call(ByteBuf byteBuf) {
+            return byteBuf.toString(Charset.forName("UTF-8"));
+          }
+        });
+      }
+    }).toBlocking().forEach(new Action1<String>() {
+
+      @Override
+      public void call(String t1) {
+        result.add(t1);
+      }
+    });
+    Assert.assertEquals("Response not found.", 1, result.size());
+
+    String message = result.get(0);
+
+    Assert.assertTrue("Invalid message from server", 
+        message.contains("One Platform"));
+  }
 }

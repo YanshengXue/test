@@ -1,9 +1,6 @@
 package com.thomsonreuters.rest.service;
 
 
-import io.reactivex.netty.RxNetty;
-import io.reactivex.netty.pipeline.PipelineConfigurators;
-
 import java.io.IOException;
 
 import javax.ws.rs.core.MediaType;
@@ -30,7 +27,6 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
-import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.BootstrapInjectionModule;
 import com.thomsonreuters.injection.module.MainModule;
@@ -38,6 +34,7 @@ import com.thomsonreuters.karyon.ShutdownModule;
 import com.thomsonreuters.rest.service.HelloworldResourceTest.TestInjectionModule.TestModule;
 
 /**
+ * This is partly integration test as it verified app's router and hello resource in addition to SSE server/client test
  * @author yurgis
  *
  */
