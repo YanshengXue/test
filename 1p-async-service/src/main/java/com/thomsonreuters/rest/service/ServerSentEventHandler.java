@@ -29,6 +29,14 @@ public class ServerSentEventHandler implements RequestHandler<ByteBuf, ByteBuf> 
 
   @Override
   public Observable<Void> handle(HttpServerRequest<ByteBuf> request, HttpServerResponse<ByteBuf> response) {
+    //checkpoint logic
+    final int startEventId;
+    String lastEventId = request.getHeaders().get("Last-Event-ID");
+    if (lastEventId != null) {
+      startEventId = Integer.parseInt(lastEventId) + 1;
+    } else {
+      startEventId = 0;
+    }
     response.getHeaders().addHeader("Access-Control-Allow-Origin", "*");
     response.getHeaders().add(HttpHeaders.Names.CONTENT_TYPE, "text/event-stream");
     //response.getHeaders().add(HttpHeaders.Names.CONTENT_LENGTH, "-1");
@@ -39,11 +47,13 @@ public class ServerSentEventHandler implements RequestHandler<ByteBuf, ByteBuf> 
     int interval = HandlerUtils.getIntParam(request, "interval", 1000);
     return Observable.interval(interval, TimeUnit.MILLISECONDS).flatMap(new Func1<Long, Observable<Void>>() {
       @Override
-      public Observable<Void> call(Long interval) {
-        log.info("Writing SSE event for interval: " + interval);
-        ByteBuf eventType = name == null? null : response.getAllocator().buffer().writeBytes((name).getBytes());
-        ByteBuf data = response.getAllocator().buffer().writeBytes(("{message: 'hello " + interval + "'}").getBytes());
-        ServerSentEvent event = new ServerSentEvent(null, eventType, data);
+      public Observable<Void> call(Long index) {
+        long currentEventId = startEventId + index;
+        log.info("Writing SSE event for interval: " + currentEventId);
+        ByteBuf eventId = response.getAllocator().buffer().writeBytes(String.valueOf(currentEventId).getBytes());
+        ByteBuf eventType = name == null? null : response.getAllocator().buffer().writeBytes(name.getBytes());
+        ByteBuf data = response.getAllocator().buffer().writeBytes(("{message: 'hello " + currentEventId + "'}").getBytes());
+        ServerSentEvent event = new ServerSentEvent(eventId, eventType, data);
         
         return response.writeAndFlush(event, new SSETransformer());
       }
