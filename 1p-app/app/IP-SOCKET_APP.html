@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="1P-SOCKET_APP">
+
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="http://cdn.rawgit.com/remy/polyfills/master/EventSource.js"></script>
+    <script src="1P-SOCKET_APP.js"></scriptsrc></script>
+</head>
+
+<body >
+<h1 ALIGN="CENTER">Welcome to One Platform</h1>
+<div ng-controller="oneAppCtlr" >
+
+    <h4>REST Endpoint /hello</h4>
+    <pre>http status code: {{status}}</pre>
+    <pre>http response data: {{data}}</pre>
+    
+    <h4>Server Sent Events: /sse (only for 1p-async-service)</h4>
+    <label>
+       Event Name:
+       <input type="text" ng-model="eventName" required>
+    </label>
+    <label>
+       Event Interval:
+       <input type="text" ng-model="eventInterval" required>
+    </label>
+    <button ng-click="startEvents()">Start Events</button>
+    <button /*ng-disabled="sources.length == 0"*/ ng-click="stopEvents()">Stop All Events</button>
+    <h4>Event Log</h4>
+    <button ng-click="clearLog()">Clear</button>
+    <pre style="background-color: lightgray;">{{eventLog}}</pre>
+</div>
+
+</body>
+</html>
