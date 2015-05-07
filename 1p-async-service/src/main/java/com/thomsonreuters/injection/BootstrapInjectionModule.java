@@ -1,12 +1,14 @@
 package com.thomsonreuters.injection;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import netflix.adminresources.resources.KaryonWebAdminModule;
 import netflix.karyon.KaryonBootstrap;
 import netflix.karyon.archaius.ArchaiusBootstrap;
 import netflix.karyon.eureka.KaryonEurekaModule;
 import netflix.karyon.servo.KaryonServoModule;
 import netflix.karyon.transport.http.KaryonHttpModule;
+import netflix.karyon.transport.http.websockets.KaryonWebSocketsModule;
 
 import com.google.inject.Inject;
 import com.netflix.config.ConfigurationManager;
@@ -18,6 +20,7 @@ import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.karyon.ShutdownModule;
 
+
 @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
 @KaryonBootstrap(name = "1p-async-service", healthcheck = HealthCheck.class)
 @Singleton
@@ -28,7 +31,9 @@ import com.thomsonreuters.karyon.ShutdownModule;
         KaryonEurekaModule.class,
         EventsModule.class,
         MainModule.class,
-        BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
+        //BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
+        BootstrapInjectionModule.WebSocketRouterModuleImpl.class
+        
 })
 public interface BootstrapInjectionModule {
   class KaryonRxRouterModuleImpl extends KaryonHttpModule<ByteBuf, ByteBuf> {
@@ -61,5 +66,19 @@ public interface BootstrapInjectionModule {
     
   }
   
-  
+  public static class WebSocketRouterModuleImpl extends KaryonWebSocketsModule<TextWebSocketFrame, TextWebSocketFrame> {
+      public WebSocketRouterModuleImpl() {
+        super("webSocketsModule", TextWebSocketFrame.class, TextWebSocketFrame.class);
+      }
+
+      @Override
+      protected void configureServer() {
+    	int port = 7003;
+    	     
+        bindConnectionHandler().to(WebSocketHandler.class);
+        server().port(port);
+      }
+    }
+
+ 
 }

@@ -34,6 +34,7 @@ import com.netflix.governator.annotations.Modules;
 import com.netflix.governator.guice.BootstrapModule;
 import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
+import com.thomsonreuters.injection.WebSocketHandler;
 import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.rest.service.WebSocketsTest.TestInjectionModule.TestModule;
 
@@ -71,50 +72,14 @@ public class WebSocketsTest {
 
       @Override
       protected void configureServer() {
-        bindConnectionHandler().to(TestableConnectionHandler.class);
+        bindConnectionHandler().to(WebSocketHandler.class);
         server().port(PORT);
       }
     }
 
   }
 
-  private static class TestableConnectionHandler implements ConnectionHandler<TextWebSocketFrame, TextWebSocketFrame> {
-
-    @Configuration("1p.service.name")
-    private Supplier<String> appName = Suppliers.ofInstance("One Platform");
-
-    @Inject
-    public TestableConnectionHandler() {
-
-    }
-
-    @Override
-    public Observable<Void> handle(ObservableConnection<TextWebSocketFrame, TextWebSocketFrame> newConnection) {
-      return Observable.interval(INTERVAL, TimeUnit.MILLISECONDS).flatMap(new Func1<Long, Observable<Void>>() {
-        @Override
-        public Observable<Void> call(Long interval) {
-          System.out.println("Writing event for interval: " + interval);
-          return newConnection.writeAndFlush(new TextWebSocketFrame("Event " + interval));
-        }
-      }).materialize().takeWhile(new Func1<Notification<Void>, Boolean>() {
-        @Override
-        public Boolean call(Notification<Void> notification) {
-          if (notification.isOnError()) {
-            System.out.println("Write to client failed, stopping response sending.");
-            notification.getThrowable().printStackTrace(System.err);
-          }
-          return !notification.isOnError();
-        }
-      }).map(new Func1<Notification<Void>, Void>() {
-        @Override
-        public Void call(Notification<Void> notification) {
-          return null;
-        }
-      });
-    }
-
-   }
-
+  
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
     server = Karyon.forApplication(TestInjectionModule.class, (BootstrapModule[]) null);
