@@ -52,6 +52,9 @@ sourceSets {
 test {
   //enable to see logging during gradle build
   //testLogging.showStandardStreams = true
+  testLogging {
+        events "passed", "skipped", "failed"
+  }
 }
 
 repositories {
