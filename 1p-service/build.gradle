@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'distribution'
 apply plugin: 'java-library-distribution'
 apply plugin: 'os-package'
@@ -69,6 +70,13 @@ repositories {
 
 eclipse {
     classpath {
+        downloadSources = true
+    }
+}
+
+idea {
+    module {
+        jdkName = '1.8'
         downloadSources = true
     }
 }
