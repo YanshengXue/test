@@ -4,6 +4,7 @@
 *.ipr
 *.iws
 work/
+log/
 logs/
 .DS_Store
 build/
