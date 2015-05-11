@@ -1,13 +1,12 @@
 package com.thomsonreuters.rest.service;
 
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.reactivex.netty.RxNetty;
-import io.reactivex.netty.channel.ConnectionHandler;
 import io.reactivex.netty.channel.ObservableConnection;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import netflix.karyon.Karyon;
 import netflix.karyon.KaryonBootstrap;
@@ -21,18 +20,12 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import rx.Notification;
 import rx.Observable;
 import rx.functions.Func1;
 
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.netflix.governator.annotations.Configuration;
 import com.netflix.governator.annotations.Modules;
 import com.netflix.governator.guice.BootstrapModule;
-import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.WebSocketHandler;
 import com.thomsonreuters.injection.module.MainModule;
@@ -65,9 +58,9 @@ public class WebSocketsTest {
       }
     }
 
-    public static class TestableWebSocketsModule extends KaryonWebSocketsModule<TextWebSocketFrame, TextWebSocketFrame> {
+    public static class TestableWebSocketsModule extends KaryonWebSocketsModule<WebSocketFrame, WebSocketFrame> {
       public TestableWebSocketsModule() {
-        super("testWebSocketsModule", TextWebSocketFrame.class, TextWebSocketFrame.class);
+        super("testWebSocketsModule", WebSocketFrame.class, WebSocketFrame.class);
       }
 
       @Override
