@@ -1,7 +1,7 @@
 package com.thomsonreuters.injection;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import netflix.adminresources.resources.KaryonWebAdminModule;
 import netflix.karyon.KaryonBootstrap;
 import netflix.karyon.archaius.ArchaiusBootstrap;
@@ -66,9 +66,9 @@ public interface BootstrapInjectionModule {
     
   }
   
-  public static class WebSocketRouterModuleImpl extends KaryonWebSocketsModule<TextWebSocketFrame, TextWebSocketFrame> {
+  public static class WebSocketRouterModuleImpl extends KaryonWebSocketsModule<WebSocketFrame, WebSocketFrame> {
       public WebSocketRouterModuleImpl() {
-        super("webSocketsModule", TextWebSocketFrame.class, TextWebSocketFrame.class);
+        super("webSocketsModule", WebSocketFrame.class, WebSocketFrame.class);
       }
 
       @Override
