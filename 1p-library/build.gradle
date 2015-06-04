@@ -24,18 +24,28 @@ dependencies {
 	testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
+javadoc{
+	options.addBooleanOption("Xdoclint:none").setValue(true);
+}
+
+/**
+ * Release configuration
+ */
 createReleaseTag.dependsOn uploadArchives
 
+release {
+	tagTemplate = "$name-$version".replace("-SNAPSHOT", "")
+}
+
+/**
+ * Nexus deployment configuration
+ */
 def nexusUsername="$System.env.nexusUsername"
 def nexusPassword="$System.env.nexusPassword"
 
 extraArchive {
 	sources = true
 	javadoc = true
-}
-
-javadoc{
-	options.addBooleanOption("Xdoclint:none").setValue(true);
 }
 
 nexus {
