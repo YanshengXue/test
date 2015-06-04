@@ -31,11 +31,18 @@ javadoc{
 /**
  * Release configuration
  */
-createReleaseTag.dependsOn uploadArchives
-
 release {
 	tagTemplate = "$name-$version".replace("-SNAPSHOT", "")
 }
+
+task writeReleaseProperties << {
+	ant.propertyfile(
+		file: "build/release.properties") {
+		entry( key: "BRANCH", value: release.tagTemplate)
+	}
+}
+
+createReleaseTag.dependsOn uploadArchives, writeReleaseProperties
 
 /**
  * Nexus deployment configuration
