@@ -11,7 +11,7 @@ buildscript {
 	}
 
 	dependencies {
-		classpath 'net.researchgate:gradle-release:2.0.2'
+		classpath 'net.researchgate:gradle-release:2.1.1'
 		classpath 'com.bmuschko:gradle-nexus-plugin:2.3'
 	}
 }
