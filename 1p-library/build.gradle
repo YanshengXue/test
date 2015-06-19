@@ -1,0 +1,62 @@
+apply plugin: 'java'
+apply plugin: 'net.researchgate.release'
+apply plugin: 'com.bmuschko.nexus'
+
+sourceCompatibility = 1.8
+group = 'com.thomsonreuters'
+
+buildscript {
+	repositories {
+		maven { url "http://repo.1p.thomsonreuters.com/nexus/content/groups/public" }
+	}
+
+	dependencies {
+		classpath 'net.researchgate:gradle-release:2.1.1'
+		classpath 'com.bmuschko:gradle-nexus-plugin:2.3'
+	}
+}
+
+repositories {
+	maven { url "http://repo.1p.thomsonreuters.com/nexus/content/groups/public" }
+}
+
+dependencies {
+	testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+javadoc{
+	options.addBooleanOption("Xdoclint:none").setValue(true);
+}
+
+/**
+ * Release configuration
+ */
+release {
+	tagTemplate = "$name-$version".replace("-SNAPSHOT", "")
+}
+
+task writeReleaseProperties << {
+	ant.propertyfile(
+		file: "build/release.properties") {
+		entry( key: "BRANCH", value: release.tagTemplate)
+	}
+}
+
+createReleaseTag.dependsOn uploadArchives, writeReleaseProperties
+
+/**
+ * Nexus deployment configuration
+ */
+def nexusUsername="$System.env.nexusUsername"
+def nexusPassword="$System.env.nexusPassword"
+
+extraArchive {
+	sources = true
+	javadoc = true
+}
+
+nexus {
+	sign = false
+	repositoryUrl         = 'http://repo.1p.thomsonreuters.com/nexus/content/repositories/releases/'
+	snapshotRepositoryUrl = 'http://repo.1p.thomsonreuters.com/nexus/content/repositories/snapshots/'
+}
