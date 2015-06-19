@@ -1,0 +1,32 @@
+apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'jsonschema2pojo'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+def nexusUsername="$System.env.nexusUsername"
+def nexusPassword="$System.env.nexusPassword"
+
+tasks.eclipseClasspath.dependsOn(generateJsonSchema2Pojo)
+
+test {
+  systemProperties 'property': 'value'
+}
+
+nexus {
+  sign = false
+  repositoryUrl         = 'http://repo.1p.thomsonreuters.com/nexus/content/repositories/releases/'
+  snapshotRepositoryUrl = 'http://repo.1p.thomsonreuters.com/nexus/content/repositories/snapshots/'
+}
+
+jsonSchema2Pojo {
+  includeJsr303Annotations = false
+  includeHashcodeAndEquals = false
+  includeToString = false
+  usePrimitives = true
+  generateBuilders = true
+  source = files("${sourceSets.main.output.resourcesDir}/schema")
+  targetDirectory = file("${project.buildDir}/generated-sources")
+  propertyWordDelimiters = ['_'] as char[]
+}
+

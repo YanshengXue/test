@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://schema.1p.thomsonreuters.com/template-event-entity-schema#",
+  "description": "Template Event Entity Schema", 
+  "type": "object",
+  "javaType": "com.thomsonreuters.events.schema.TemplateEventEntity",
+  "additionalProperties": false,
+  "type" : "object",
+  "extends" : {
+      "$ref" : "resource:schema/basic-event-entity.json"
+   },
+   "properties" : {
+       "property" : {
+          "type" : "string",
+          "description" : "simple string property"
+       }
+   }
+}

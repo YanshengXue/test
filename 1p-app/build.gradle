@@ -1,11 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'aws-s3'
 apply plugin: 'com.moowork.gulp'
 apply plugin: 'jetty'
 apply plugin: 'os-package'
+
 sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 task wrapper(type: Wrapper) {
@@ -21,22 +19,9 @@ buildscript {
     dependencies {
         classpath 'com.moowork.gradle:gradle-gulp-plugin:0.1'
         classpath 'jp.classmethod.aws:gradle-aws-plugin:0.10'
-        classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.2.0'
     }
 }
 
-repositories {
-	jcenter()
-    maven {
-      url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/thirdparty/"
-    }
-    maven {
-      url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/snapshots/"
-    }
-    maven {
-      url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/releases/"
-    }
-}
 //Change the env as required
 def chosenEnv
 if ( System.getenv("POC_ENVIRONMENT") ) { chosenEnv = System.getenv("POC_ENVIRONMENT") } else { chosenEnv = "integration" }
@@ -47,7 +32,7 @@ configurations.all {
 }	
   
 dependencies {
-  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.9.+'
+  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.20.+'
 }
 
 def webXml    = 'dist/webapp/WEB-INF/web.xml'
