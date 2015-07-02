@@ -11,6 +11,8 @@ allprojects {
   }
 }
 
+apply from: file('codequality/check.gradle')
+
 subprojects {
   apply plugin: 'java'
   apply plugin: 'eclipse'
