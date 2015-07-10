@@ -12,9 +12,8 @@ import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.events.karyon.EventsModule;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.module.MainModule;
-import com.thomsonreuters.karyon.JerseyRoutingModule;
 import com.thomsonreuters.karyon.ShutdownModule;
-import com.thomsonreuters.swagger.SwaggerApiHandler;
+import com.thomsonreuters.swagger.JerseySwaggerAwareRoutingModule;
 
 @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
 @KaryonBootstrap(name = "1p-service", healthcheck = HealthCheck.class)
@@ -30,11 +29,7 @@ import com.thomsonreuters.swagger.SwaggerApiHandler;
         BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
 })
 public interface BootstrapInjectionModule {
-  class KaryonRxRouterModuleImpl extends JerseyRoutingModule {
-    
-    public KaryonRxRouterModuleImpl() {
-      super( 200, 7001, SwaggerApiHandler.class );
-    }
+  class KaryonRxRouterModuleImpl extends JerseySwaggerAwareRoutingModule {
     
     @Override
     protected void configureServer() {
