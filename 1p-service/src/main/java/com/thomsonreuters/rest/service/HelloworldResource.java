@@ -52,7 +52,8 @@ public class HelloworldResource {
 
       response.put("Message", "Hello " + name + " from " + appName.get());
       return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
-    } catch (JSONException e) {
+    }
+    catch (JSONException e) {
       logger.error("Error creating json response.", e);
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
@@ -66,7 +67,8 @@ public class HelloworldResource {
     try {
       response.put("Message", "Hello " + name + " from " + appName.get());
       return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
-    } catch (JSONException e) {
+    }
+    catch (JSONException e) {
       logger.error("Error creating json response.", e);
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
@@ -84,7 +86,8 @@ public class HelloworldResource {
       response.put("Message", "Hello from " + appName.get() + " running on instance "
           + ConfigurationManager.getDeploymentContext().getDeploymentServerId());
       return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
-    } catch (JSONException e) {
+    }
+    catch (JSONException e) {
       logger.error("Error creating json response.", e);
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }

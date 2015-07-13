@@ -3,5 +3,6 @@ subprojects {
 	checkstyle {
 		ignoreFailures = true 
 		configFile = rootProject.file('codequality/checkstyle.xml')
+		toolVersion = '6.7'
 	}
 }

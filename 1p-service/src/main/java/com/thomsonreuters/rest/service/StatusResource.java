@@ -29,7 +29,8 @@ public class StatusResource {
     try {
       response.put("Status", "TODO");
       return Response.ok(response.toString()).header("Access-Control-Allow-Origin", "*").build();
-    } catch (JSONException e) {
+    }
+    catch (JSONException e) {
       logger.error("Error creating json response.", e);
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }

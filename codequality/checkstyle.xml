@@ -20,7 +20,6 @@
     <module name="IllegalImport"/>
     <module name="RedundantImport"/>
     <module name="UnusedImports"/>
-
     <module name="NeedBraces"/>
     <module name="MissingSwitchDefault"/>
     <module name="OneStatementPerLine"/>
@@ -28,7 +27,13 @@
     <module name="MemberName"/>
 	<module name="LeftCurly"/>
 	<module name="MultipleVariableDeclarations"/>
-
+	<module name="PackageName"> 
+        <property name="format" value="^com\.thomsonreuters(\.[a-z][a-z0-9]*)*$"/> 
+    </module> 
+	<module name="EmptyCatchBlock"> 
+        <property name="exceptionVariableName" value="expected|ignore"/> 
+    </module> 
+	
     <module name="LineLength">
         <property name="max" value="120"/>
     </module>
