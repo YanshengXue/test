@@ -17,44 +17,44 @@ import com.thomsonreuters.eiddo.EiddoListener;
 
 @Singleton
 public class HealthCheck implements HealthCheckHandler {
-    private static final Logger log = LoggerFactory.getLogger(HealthCheck.class);
+  private static final Logger log = LoggerFactory.getLogger(HealthCheck.class);
 
-    private final EiddoClient eiddo;
-    private boolean eiddoCorrupted = false;
-    
-    @Inject
-    public HealthCheck(EiddoClient eiddo) {
-      this.eiddo = eiddo;
-      eiddo.addListener(new EiddoListener() {
-        
-        @Override
-        public void onRepoChainUpdated(List<File> repoDir) {
-          // TODO Auto-generated method stub
-          
-        }
-        
-        @Override
-        public void onError(Throwable error, boolean fatal) {
-          if (fatal) {
-            eiddoCorrupted = true;
-          }
-          
-        }
-      });
-    }
-    
-    @PostConstruct
-    public void init() {
-        log.info("Health check initialized.");
-    }
+  private final EiddoClient eiddo;
+  private boolean eiddoCorrupted = false;
 
-    @Override
-    public int getStatus() {
-        log.info("Health check called.");
-        if (eiddoCorrupted) {
-          log.error("Eiddo appears to be corrupted. The instance has to be terminated and relaunched");
-          return 500;
+  @Inject
+  public HealthCheck(EiddoClient eiddo) {
+    this.eiddo = eiddo;
+    eiddo.addListener(new EiddoListener() {
+
+      @Override
+      public void onRepoChainUpdated(List<File> repoDir) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void onError(Throwable error, boolean fatal) {
+        if (fatal) {
+          eiddoCorrupted = true;
         }
-        return 200;
+
+      }
+    });
+  }
+
+  @PostConstruct
+  public void init() {
+    log.info("Health check initialized.");
+  }
+
+  @Override
+  public int getStatus() {
+    log.info("Health check called.");
+    if (eiddoCorrupted) {
+      log.error("Eiddo appears to be corrupted. The instance has to be terminated and relaunched");
+      return 500;
     }
+    return 200;
+  }
 }

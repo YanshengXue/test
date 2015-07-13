@@ -1,5 +1,10 @@
 package com.thomsonreuters.rest.service;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,6 +27,7 @@ import com.netflix.governator.annotations.Configuration;
 
 @Singleton
 @Path("/hello")
+@Api(value = "/hello")
 public class HelloworldResource {
 
   private static final Logger logger = LoggerFactory.getLogger(HelloworldResource.class);
@@ -34,6 +40,8 @@ public class HelloworldResource {
 
   }
 
+  @ApiOperation(value = "get to name", notes = "return name")
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "success"), @ApiResponse(code = 500, message = "error") })
   @Path("to/{name}")
   @GET
   @Produces(MediaType.APPLICATION_JSON)

@@ -18,25 +18,17 @@ import com.thomsonreuters.swagger.JerseySwaggerAwareRoutingModule;
 @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
 @KaryonBootstrap(name = "1p-service", healthcheck = HealthCheck.class)
 @Singleton
-@Modules(include = {
-        ShutdownModule.class,
-        KaryonServoModule.class,
-        KaryonWebAdminModule.class,
-        KaryonEurekaModule.class,
-        EventsModule.class,
-        MainModule.class,
-        SwaggerHystrixModule.class,
-        BootstrapInjectionModule.KaryonRxRouterModuleImpl.class,
-})
+@Modules(include = { ShutdownModule.class, KaryonServoModule.class, KaryonWebAdminModule.class,
+    KaryonEurekaModule.class, EventsModule.class, MainModule.class, SwaggerHystrixModule.class,
+    BootstrapInjectionModule.KaryonRxRouterModuleImpl.class, })
 public interface BootstrapInjectionModule {
   class KaryonRxRouterModuleImpl extends JerseySwaggerAwareRoutingModule {
-    
+
     @Override
     protected void configureServer() {
-      //replace default behavior (port,pool size) if needed
+      // replace default behavior (port,pool size) if needed
       super.configureServer();
     }
   }
-  
-  
+
 }
