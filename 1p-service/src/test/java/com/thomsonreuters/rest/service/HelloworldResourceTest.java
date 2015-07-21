@@ -30,13 +30,14 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 import com.thomsonreuters.eiddo.EiddoPropertiesLoader;
 import com.thomsonreuters.handler.HealthCheck;
 import com.thomsonreuters.injection.BootstrapInjectionModule;
+import com.thomsonreuters.injection.SwaggerHystrixModule;
 import com.thomsonreuters.injection.module.MainModule;
 import com.thomsonreuters.rest.service.HelloworldResourceTest.TestInjectionModule.TestModule;
 
 /**
  * This is really an end-to-end test that verifies Eiddo properties are
  * dynamically loaded.
- * 
+ *
  * @author yurgis
  *
  */
@@ -48,10 +49,11 @@ public class HelloworldResourceTest extends JerseyTest {
   @ArchaiusBootstrap(loader = EiddoPropertiesLoader.class)
   @KaryonBootstrap(name = "junit", healthcheck = HealthCheck.class)
   @Singleton
-  @Modules(include = { 
-        ShutdownModule.class, 
-        TestModule.class, 
-        BootstrapInjectionModule.KaryonRxRouterModuleImpl.class 
+  @Modules(include = {
+        ShutdownModule.class,
+        TestModule.class,
+        SwaggerHystrixModule.class,
+        BootstrapInjectionModule.KaryonRxRouterModuleImpl.class
   })
   public interface TestInjectionModule {
     public static class TestModule extends MainModule {
