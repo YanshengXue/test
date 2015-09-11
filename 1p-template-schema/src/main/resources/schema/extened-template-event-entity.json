@@ -27,6 +27,10 @@
        "type": "integer",
        "format": "utc-millisec"
      },
+     "host" : {
+       "description": "originating host, IP or DNS name or datacenter instance id",
+       "type": "string"
+     },
      "property" : {
         "type" : "string",
         "description" : "simple string property"
