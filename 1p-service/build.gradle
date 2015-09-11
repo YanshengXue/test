@@ -86,8 +86,8 @@ idea {
 
 dependencies {
   
-  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.30.+'
-  compile group: 'com.thomsonreuters', name: '1p-service-swagger', version: '0.30.+'
+  compile group: 'com.thomsonreuters', name: '1p-service-lib', version: "${servicelib_version}"
+  compile group: 'com.thomsonreuters', name: '1p-service-swagger', version: "${servicelib_version}"
     
   testCompile group:  'junit', name: 'junit-dep', version: '4.11'
   // Jersey test framework
