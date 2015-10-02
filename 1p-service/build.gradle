@@ -1,9 +1,8 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'distribution'
 apply plugin: 'java-library-distribution'
 apply plugin: 'os-package'
+apply plugin: 'net.researchgate.release'
+apply plugin: 'sonar-runner'
 
 sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -12,22 +11,15 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
 }
 
-def chosenEnv
-if ( System.getenv("POC_ENVIRONMENT") ) { chosenEnv = System.getenv("POC_ENVIRONMENT") } else { chosenEnv = "integration" }
+def permanentPackageName = project.name
+def group = 'thomsonreuters-1p'
+def rpmRelease = 1
+def snapshot = true
+if (snapshot) { rpmRelease = 'SNAPSHOT' }
 
-configurations.all {     
+configurations.all {
 	resolutionStrategy.cacheDynamicVersionsFor 1, 'hours'     
 	resolutionStrategy.cacheChangingModulesFor 1, 'hours' 
-}
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.2.0'
-    }
 }
 
 sourceSets {
@@ -98,32 +90,34 @@ dependencies {
 //eiddo repo is the same as project name by default but you can change it
 def eiddoRepo = rootProject.name
 
-import org.apache.tools.ant.filters.ReplaceTokens
-distributions {
-  main{
-		baseName = rootProject.name
-		
-		 contents {
-      from ( 'scripts' ) {
-          fileMode = 0755
-          filter(ReplaceTokens, tokens: [ 'PROJECT_NAME': baseName, 'VERSION': version, 'EIDDO_REPO' : eiddoRepo])
-      }
-    }
+ospackage {
+  packageName = permanentPackageName
+  release = rpmRelease
+  arch = NOARCH
+  os = LINUX
+  from(file('root/etc/reuters/karyon')) {
+    into('/etc/reuters')
+    user 'root'
+    permissionGroup 'root'
+  }
+
+
+  from("build/install/"+ permanentPackageName) {
+    into('/opt/reuters/apps/karyon')
+    user 'karyon'
+    permissionGroup 'karyon'
+
   }
 }
-ospackage {
-  version = '0.0.1-SNAPSHOT'
-  requires('oracle-java8-installer')
-  requires('git')
-  requires('awscli')
-  postInstall("echo 'export JAVA_OPTS=\"-DdisableEmbeddedCassandra=true -Deiddo.client.repoChain=1p-common," + eiddoRepo + " -Deureka.environment=${chosenEnv} -Darchaius.deployment.environment=${chosenEnv}\"' >> /opt/"+ name +"-"+ version +"/setenv.sh")
-  postInstall("echo 'JAVA_HOME=/usr/lib/jvm/java-8-oracle'  >> /opt/"+ name +"-"+ version +"/setenv.sh")
 
-  from( zipTree("build/distributions/"+ name +"-"+ version +".zip") ) {
-    into('/opt')
+buildRpm.dependsOn installDist
+
+sonarRunner {
+  sonarProperties {
+    property "sonar.host.url", "http://sonar.oneplatform.build"
+    property "sonar.jdbc.url", "jdbc:mysql://sonar.c35w2xq4gxyh.us-west-2.rds.amazonaws.com:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+    property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+    property "sonar.jdbc.username", "$System.env.sonarUsername"
+    property "sonar.jdbc.password", "$System.env.sonarPassword"
   }
-  postInstall("rm -f /etc/init.d/jetty8")
-  postInstall("mkdir -p /opt/"+ name +"-"+ version +"/log && chown ubuntu:ubuntu /opt/"+ name +"-"+ version +"/log")
-  postInstall("mkdir -p /opt/"+ name +"-"+ version +"/conf && chown ubuntu:ubuntu /opt/"+ name +"-"+ version +"/conf")
-  link("/etc/init/"+ name +".conf", "/opt/"+ name +"-"+ version +"/daemon.sh")
 }
